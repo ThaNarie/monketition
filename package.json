@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "sb dev -p 6006",
+    "storybook:build": "sb build -o ./.docs/react-hooks"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -43,6 +45,14 @@
     "@mediamonks/eslint-config-typescript": "1.0.9",
     "@mediamonks/eslint-config-typescript-react": "1.0.11",
     "@mediamonks/prettier-config": "1.0.1",
+    "@storybook/addon-essentials": "^7.0.0-beta.13",
+    "@storybook/addon-interactions": "^7.0.0-beta.13",
+    "@storybook/addon-links": "^7.0.0-beta.13",
+    "@storybook/blocks": "^7.0.0-beta.13",
+    "@storybook/cli": "^7.0.0-beta.13",
+    "@storybook/react": "^7.0.0-beta.13",
+    "@storybook/react-vite": "^7.0.0-beta.13",
+    "@storybook/types": "^7.0.0-beta.13",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react-swc": "^3.0.1",
