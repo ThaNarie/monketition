@@ -1,0 +1,76 @@
+// TODO: responsive breakponts so extra spacing is only there on tablet and desktop
+.league-table {
+  border-collapse: separate;
+  border-spacing: 0;
+
+  thead th {
+    position: sticky;
+    z-index: 1;
+    top: 65px;
+    height: 75px;
+    background-color: var(--bs-body-bg);
+    border-bottom: 1px solid #333;
+
+    &::after {
+      content: '';
+      pointer-events: none;
+      z-index: 1;
+      position: absolute;
+      display: block;
+      top: 75px;
+      left: 0;
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.04) 0, rgba(0,0,0,0) 50px);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  &.is-stuck {
+    thead th {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+
+  tbody tr:first-child {
+    td, th {
+      padding-top: 20px;
+    }
+  }
+
+  tbody tr {
+    td, th {
+      min-height: 70px;
+    }
+  }
+
+  td, th {
+    vertical-align: middle;
+  }
+
+  tr.selected {
+    background-color: rgba(255, 255, 255, 0.02);
+
+    th {
+      border-left: 3px solid #13495a;
+    }
+
+    .name {
+      color: #0c7da1;
+    }
+  }
+
+  .head-rank, .cell-rank {
+    padding-right: 14px;
+  }
+
+  .participant {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}

@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react';
-import { getLeagueMock } from '../../mocks/Leage.mocks';
+import { getMockLeague } from '../../mocks/Leage.mocks';
 import { LeagueTile } from './LeagueTile';
 
 export default {
@@ -12,7 +12,7 @@ export const Default: StoryObj<typeof LeagueTile> = {
     return <LeagueTile {...props} />;
   },
   args: {
-    ...getLeagueMock(),
+    ...getMockLeague(),
   },
 };
 
@@ -23,7 +23,7 @@ export const List: StoryObj = {
         {Array.from({ length: 10 }).map((_, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <div className="col-xl-6" key={index}>
-            <LeagueTile {...getLeagueMock()} />
+            <LeagueTile {...getMockLeague()} />
           </div>
         ))}
       </div>

@@ -3,52 +3,66 @@ import { Link } from 'react-router-dom';
 import foosballIcon from '../../sports/foosball.svg';
 import poolIcon from '../../sports/pool.svg';
 import tableTennisIcon from '../../sports/table-tennis.svg';
-import { type League } from '../../types/League';
+import { type League, type LeagueType } from '../../types/League';
 import { type SportType } from '../../types/Sport';
-import './leage-tile.css';
-import { StatItem } from './components/StatItem';
+import { ActivityChart } from './components/ActivityChart';
+import { Stats } from './components/Stats';
+import './leage-tile.scss';
 
-const icons: Partial<Record<SportType, string>> = {
+const sportIcons: Partial<Record<SportType, string>> = {
   pool: poolIcon,
   // eslint-disable-next-line @typescript-eslint/naming-convention
   'table-tennis': tableTennisIcon,
   foosball: foosballIcon,
 };
 
+const leagueIcons: Partial<Record<LeagueType, string>> = {
+  continuous: 'tools_ladder',
+  season: 'calendar_month',
+  tournament: 'family_history',
+};
+
 type LeagueTileProps = Partial<League> & { className?: string };
 
+// TODO:
+//  - your rank in the league, if you participate
 export function LeagueTile({
   slug,
+  type,
   name,
   description,
   sport,
-  playerCount,
+  office,
   className,
+  lastMatch,
+  endAt,
+  results,
 }: LeagueTileProps): JSX.Element {
   return (
     <div className={classNames('league-tile', 'card', className)} data-sport-type={sport?.type}>
-      {sport && <img className="sport-logo" src={icons[sport.type]} alt={name} />}
       <div className="card-body">
-        <Link to={`/leages/${slug}`}>
-          <h4 style={{ display: 'inline-block' }}>{name}</h4>
+        {sport && <img className="sport-logo" src={sportIcons[sport.type]} alt={name} />}
+        <Link to={`/leagues/${slug}`}>
+          <h4 style={{ display: 'inline-block' }}>
+            {type && (
+              <>
+                <span className="material-symbols-outlined">{leagueIcons[type]}</span>{' '}
+              </>
+            )}
+            {name}
+          </h4>
         </Link>
+        {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
+        <div className={classNames('office', { 'my-office': office === 'hilversum' })}>
+          <span className="badge text-bg-dark">{office}</span>
+        </div>
         <p className="card-text description">{description}</p>
+        <div className="chart">
+          <ActivityChart />
+        </div>
       </div>
       <div className="card-footer text-muted">
-        <div className="stats">
-          <div className="player-stats">
-            <StatItem icon="group" label={`${playerCount}`} tooltip="Player count in league" />
-            <StatItem icon="person" label="John Doe" tooltip="Top player in league" />
-          </div>
-          <div className="schedule-stats">
-            <StatItem icon="schedule" label="3 days ago" tooltip="Last match played on Dec 24th" />
-            <StatItem
-              icon="calendar_month"
-              label="13 days to go"
-              tooltip="League ends on Feb 7th"
-            />
-          </div>
-        </div>
+        <Stats endAt={endAt} lastMatch={lastMatch} results={results} />
       </div>
     </div>
   );

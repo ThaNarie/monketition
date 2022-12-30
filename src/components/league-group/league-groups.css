@@ -2,27 +2,3 @@
   position: relative;
   margin-bottom: 3rem;
 }
-
-.league-group, .league-group::before, .league-group::after {
-  position: relative;
-  border-top: 1px solid #2f353b;
-  padding-top: 30px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.08) 0, rgba(0,0,0,0) 250px);
-}
-
-.league-group::before, .league-group::after {
-  content: '';
-  width: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-}
-
-.league-group::before {
-  left: -100%;
-}
-
-.league-group::after {
-  left: 100%;
-}
-

@@ -1,6 +1,10 @@
+import { type Match } from './Match';
+import { type Participant } from './Participant';
+import { type Result } from './Result';
 import { type Sport } from './Sport';
 
 export type LeagueType = 'continuous' | 'season' | 'tournament';
+export type OfficeLocation = 'hilversum' | 'amsterdam' | 'london' | 'new-york' | 'buenos-aires';
 
 export type League = {
   id: string;
@@ -11,11 +15,12 @@ export type League = {
   startAt: Date;
   endAt: Date;
   playerCount: number;
-  lastMatchPlayedAt: Date;
   description: string;
   rules: string;
   // season: Season; // TODO back link to parent season holder
-  // participants: Array<Participant>; // TODO links to participants
-  // results: Array<Result>; // TODO links to results
-  // matches: Array<Match>; // TODO links to matches
+  participants: Array<Participant>;
+  results: Array<Result>;
+  matches: Array<Match>;
+  lastMatch: Match;
+  office: OfficeLocation;
 };

@@ -1,10 +1,13 @@
-import { getLeagueMock } from '../../mocks/Leage.mocks';
+import { getMockLeague } from '../../mocks/Leage.mocks';
 import { type League } from '../../types/League';
 import { LeagueGroup } from '../league-group/LeagueGroup';
 
-const leagueData: ReadonlyArray<Partial<League>> = Array.from({ length: 30 }, () =>
-  getLeagueMock(),
-);
+const leagueData: ReadonlyArray<Partial<League>> = [
+  getMockLeague({ type: 'continuous' }, { sportType: 'table-tennis' }),
+  getMockLeague({ type: 'season' }, { sportType: 'pool' }),
+  getMockLeague({ type: 'tournament' }, { sportType: 'foosball' }),
+  ...Array.from({ length: 30 }, () => getMockLeague()),
+];
 
 export function Leagues(): JSX.Element {
   return (
@@ -26,7 +29,7 @@ export function Leagues(): JSX.Element {
       <LeagueGroup
         groupName="Continuous Ladder"
         description="Every ladder game you play, unrelated to which season, will count to your permanent record."
-        leagues={leagueData.slice(0, 7)}
+        leagues={leagueData.filter(({ type }) => type === 'continuous').slice(0, 7)}
       />
       <LeagueGroup
         groupName="Ladder Season"

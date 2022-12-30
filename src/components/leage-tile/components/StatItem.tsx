@@ -1,16 +1,17 @@
+import { type ReactNode } from 'react';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 type StatItemProps = {
   icon: string;
   label: string;
-  tooltip?: string;
+  tooltip?: ReactNode;
 };
 export function StatItem({ icon, label, tooltip }: StatItemProps): JSX.Element {
   return (
     <OverlayTrigger
       placement="top"
-      delay={{ show: 500, hide: 0 }}
+      delay={{ show: 300, hide: 0 }}
       overlay={<Tooltip id="tooltip-top">{tooltip}</Tooltip>}
     >
       <div>

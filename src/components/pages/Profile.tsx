@@ -1,7 +1,9 @@
+import { faker } from '@faker-js/faker';
+
 export function Profile(): JSX.Element {
   return (
     <div>
-      <h1>John Doe</h1>
+      <h1>{faker.name.fullName()}</h1>
 
       <h3>Last match</h3>
       <p>date, versus, result</p>

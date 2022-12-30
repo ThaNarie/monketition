@@ -1,0 +1,28 @@
+.section {
+  position: relative;
+  margin-bottom: 3rem;
+
+  &, &::before, &::after {
+    border-top: 1px solid #2f353b;
+    padding-top: 30px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.08) 0, rgba(0,0,0,0) 250px);
+  }
+
+  &::before, &::after {
+    content: '';
+    width: 100%;
+    position: absolute;
+    top: -1px;
+    bottom: 0;
+  }
+
+  &::before {
+    left: -100%;
+  }
+
+  &::after {
+    left: 100%;
+  }
+}
+
+

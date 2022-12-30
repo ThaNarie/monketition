@@ -1,8 +1,37 @@
-import { NavLink, Link } from 'react-router-dom';
+import classNames from 'clsx';
+import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getMockLeague } from '../../mocks/Leage.mocks';
+import './nav.scss';
+import { getMockParticipant } from '../../mocks/Participant.mocks';
+
+const user = getMockParticipant();
+const leagues = Array.from({ length: 3 }, () => getMockLeague());
 
 export function Nav(): JSX.Element {
+  const [isScrolling, setIsScrolling] = useState(false);
+  const updateScrolling = useCallback(() => {
+    const scrollPosition = document.querySelector('#root')?.scrollTop ?? 0;
+    if (scrollPosition > 0) {
+      setIsScrolling(true);
+    } else {
+      setIsScrolling(false);
+    }
+  }, []);
+  useEffect(() => {
+    document.querySelector('#root')?.addEventListener('scroll', updateScrolling);
+    // updateScrolling();
+    return () => {
+      document.querySelector('#root')?.removeEventListener('scroll', updateScrolling);
+    };
+  }, [updateScrolling]);
   return (
-    <nav className="navbar sticky-top  navbar-expand-lg bg-body-tertiary">
+    <nav
+      className={classNames('navbar sticky-top navbar-expand-lg bg-body-tertiary', {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'is-scrolling': isScrolling,
+      })}
+    >
       <div className="container">
         <Link className="navbar-brand" to="/">
           ladder.monks
@@ -29,23 +58,25 @@ export function Nav(): JSX.Element {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Leages
+                Leagues
               </a>
               <ul className="dropdown-menu">
-                <li>
-                  <h6 className="dropdown-header">Your leages</h6>
+                <li key="heading">
+                  <h6 className="dropdown-header">Your leagues</h6>
                 </li>
-                <li>
-                  <Link className="dropdown-item" to="/leages/foo-bar">
-                    Foo Bar
-                  </Link>
-                </li>
-                <li>
+                {leagues.map((league) => (
+                  <li key={league.id}>
+                    <Link className="dropdown-item" to={`/leagues/${league.slug}`}>
+                      {league.name}
+                    </Link>
+                  </li>
+                ))}
+                <li key="divider">
                   <hr className="dropdown-divider" />
                 </li>
-                <li>
-                  <Link className="dropdown-item" to="/leages">
-                    Leages Overview
+                <li key="overview">
+                  <Link className="dropdown-item" to="/leagues">
+                    League Overview
                   </Link>
                 </li>
               </ul>
@@ -80,11 +111,14 @@ export function Nav(): JSX.Element {
                   alt="avatar2"
                   src="https://i.pravatar.cc/32"
                 />
-                John Doe
+                {user.name}
               </a>
               <ul className="dropdown-menu">
                 <li className="dropdown-item-text">
-                  Hot streak <span className="badge text-bg-danger">4</span>
+                  {user.streak > 0 ? 'Hot' : 'Cold'} streak{' '}
+                  <span className={`badge text-bg-${user.streak > 0 ? 'danger' : 'primary'}`}>
+                    {Math.abs(user.streak)}
+                  </span>
                 </li>
                 <li>
                   <Link className="dropdown-item" to="/profile/me">

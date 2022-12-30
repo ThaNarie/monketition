@@ -1,5 +1,6 @@
 #root {
   overflow-x: hidden;
+  height: 100vh;
 }
 
 .material-symbols-outlined {
@@ -16,8 +17,4 @@
 :root {
   /*--bs-primary: #a98eda;*/
   /*--bs-primary-rgb: 169, 142, 218;*/
-}
-
-.card {
-  --bs-card-bg: #292e33;
 }

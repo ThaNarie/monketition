@@ -1,0 +1,17 @@
+.stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: start;
+
+  .player-stats, .schedule-stats {
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+  }
+  .schedule-stats {
+    justify-content: flex-end;
+    align-items: end;
+  }
+}
+

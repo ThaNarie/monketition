@@ -1,0 +1,76 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+import { useMount } from '@mediamonks/react-hooks';
+import classNames from 'clsx';
+import { useRef, useState } from 'react';
+import { useIsStuck } from '../../hooks/useIsStuck';
+import { type League } from '../../types/League';
+import './league-table.scss';
+
+type LeagueTableProps = {
+  results: League['results'];
+};
+export function LeagueTable({ results }: LeagueTableProps): JSX.Element {
+  const { ref, isStuck } = useIsStuck();
+  return (
+    <table
+      className={classNames('league-table table table-hover table-borderless', {
+        'is-stuck': isStuck,
+      })}
+    >
+      <thead>
+        <tr>
+          <th ref={ref} scope="col" className="head-rank" style={{ width: 60, textAlign: 'right' }}>
+            #
+          </th>
+          <th scope="col">Participant</th>
+          <th scope="col" style={{ width: 70, textAlign: 'right' }}>
+            Score
+          </th>
+          <th scope="col" style={{ width: 100, textAlign: 'center' }}>
+            Streak
+          </th>
+        </tr>
+      </thead>
+      <tbody className="table-group-divider">
+        {results.map((result, index) => (
+          <tr key={result.rank} className={classNames({ selected: index === 4 })}>
+            <th className="cell-rank" style={{ textAlign: 'right' }} scope="row">
+              {result.rank}
+            </th>
+            <td className="participant">
+              <div className="avatar">
+                <img
+                  className="rounded-circle shadow-4-strong me-2"
+                  alt="avatar2"
+                  src={`https://i.pravatar.cc/32?u=${result.participant.name}`}
+                />
+              </div>
+              <div>
+                <div className="name">{result.participant.name}</div>
+                <div>
+                  <small>
+                    <span className="text-muted">{result.participant.office}</span>
+                    {' – '}
+                    <span className="text-muted">{result.participant.jobType}</span>
+                  </small>
+                </div>
+              </div>
+            </td>
+            <td style={{ textAlign: 'right' }}>{result.score}</td>
+            <td style={{ textAlign: 'center' }}>
+              {result.participant.streak > 2 && (
+                <span className="material-symbols-outlined text-danger">local_fire_department</span>
+              )}
+              {result.participant.streak < -2 && (
+                <span className="material-symbols-outlined text-primary">ac_unit</span>
+              )}
+              {Math.abs(result.participant.streak) > 2
+                ? ` ${Math.abs(result.participant.streak)}`
+                : ''}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
