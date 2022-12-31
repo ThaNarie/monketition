@@ -1,0 +1,148 @@
+.match-tile {
+  container-type: inline-size;
+  container-name: league-tile;
+  position: relative;
+  overflow: hidden;
+
+  transition: filter 0.3s;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25)) brightness(90%);
+
+  &:hover {
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25)) brightness(110%);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+  }
+
+  &.match-winner {
+    &::before {
+      background-color: var(--bs-success);
+      opacity: 0.5;
+    }
+  }
+  &.match-loser {
+    &::before {
+      background-color: var(--bs-danger);
+      opacity: 0.4;
+    }
+  }
+
+  &.card {
+    --bs-card-bg: #292e33;
+  }
+
+  .match-date {
+    text-align: center;
+  }
+
+  .participants, .game-score, .set-score {
+    display: flex;
+    flex-direction: row;
+
+    & > * {
+      &:first-child, &:last-child {
+        width: 50%;
+      }
+      &:first-child {
+        margin-right: 0.5em;
+        text-align: right;
+      }
+      &:last-child {
+        margin-left: 0.5em;
+        text-align: left;
+      }
+    }
+  }
+
+  .participants {
+    margin-top: 8px;
+
+    .is-me {
+      color: var(--player-name) !important;
+    }
+  }
+
+  &.match-winner {
+    .participants {
+      .is-me {
+        filter: brightness(130%);
+      }
+    }
+  }
+
+  .versus {
+    position: relative;
+    top: 2px;
+  }
+
+  .participants, .game-score {
+    .winner {
+      font-weight: bold;
+    }
+    .loser {
+      color: var(--bs-secondary-color);
+    }
+  }
+
+  .game-score {
+    .winner, .loser {
+      display: inline-block;
+      padding: 2px 0;
+    }
+    .winner {
+      padding-left: 5px;
+      padding-right: 5px;
+      outline: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    small {
+      position: relative;
+      width: 16px;
+      top: 2px;
+      text-align: center;
+    }
+  }
+
+  .set-scores {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      width: 1px;
+      bottom: 0px;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .set-score {
+
+    .winner {
+      font-weight: bold;
+    }
+    .loser {
+      color: var(--bs-secondary-color);
+      font-weight: lighter;
+    }
+
+    small {
+      width: 14px;
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

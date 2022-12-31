@@ -1,7 +1,7 @@
 import classNames from 'clsx';
-import { type League } from '../../types/League';
+import { type League } from '../../../types/League';
+import { Section } from '../../section/Section';
 import { LeagueTile } from '../leage-tile/LeagueTile';
-import { Section } from '../section/Section';
 import { ComingSoonCard } from './components/ComingSoon';
 import './league-groups.css';
 

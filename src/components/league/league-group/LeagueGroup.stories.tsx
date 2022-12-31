@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react';
-import { getMockLeague } from '../../mocks/Leage.mocks';
+import { getMockLeague } from '../../../mocks/Leage.mocks';
 import { LeagueGroup } from './LeagueGroup';
 
 export default {

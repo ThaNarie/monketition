@@ -16,7 +16,7 @@ export function StatItem({ icon, label, tooltip }: StatItemProps): JSX.Element {
     >
       <div>
         <small>
-          <span className="material-symbols-outlined">{icon}</span> {label}
+          <span className="material-symbols-outlined md-18">{icon}</span> {label}
         </small>
       </div>
     </OverlayTrigger>

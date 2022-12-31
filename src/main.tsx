@@ -7,19 +7,19 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import App from './App';
-import { Home } from './components/pages/Home';
-import { League } from './components/pages/League';
-import { Leagues } from './components/pages/Leagues';
-import { Profile } from './components/pages/Profile';
+import { HomePage } from './components/pages/HomePage';
+import { LeaguePage } from './components/pages/LeaguePage';
+import { LeaguesPage } from './components/pages/LeaguesPage';
+import { ProfilePage } from './components/pages/ProfilePage';
 import './index.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index element={<Home />} />
-      <Route path="leagues" element={<Leagues />} />
-      <Route path="leagues/:id" element={<League />} />
-      <Route path="profile/:id" element={<Profile />} />
+      <Route index element={<HomePage />} />
+      <Route path="leagues" element={<LeaguesPage />} />
+      <Route path="leagues/:id" element={<LeaguePage />} />
+      <Route path="profile/:id" element={<ProfilePage />} />
     </Route>,
   ),
 );

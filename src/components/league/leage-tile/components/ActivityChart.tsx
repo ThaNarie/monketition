@@ -25,7 +25,7 @@ export function ActivityChart(): JSX.Element {
             // columnWidth: '8px',
           },
         },
-        colors: ['#000000'],
+        colors: ['#ffffff'],
         dataLabels: {
           enabled: false,
         },

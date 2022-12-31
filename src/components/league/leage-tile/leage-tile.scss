@@ -54,13 +54,13 @@
     bottom: -20px;
     right: -20px;
     width: 110px;
-    opacity: 0.2;
+    opacity: 0.05;
     filter: grayscale(1);
     transition: opacity 0.3s;
   }
 
   &:hover .sport-logo {
-    opacity: 0.4;
+    opacity: 0.3;
   }
 
   .office {
@@ -88,12 +88,17 @@
   }
 
   .chart {
-    opacity: 0.15;
+    opacity: 0.05;
     height: 25px;
     position: absolute;
     left: 24px;
     right: 120px;
     bottom: 0;
+    transition: opacity 0.3s;
+  }
+
+  &:hover .chart {
+    opacity: 0.15;
   }
 
 @container (width < 510px) {

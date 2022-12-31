@@ -52,17 +52,6 @@
     vertical-align: middle;
   }
 
-  tr.selected {
-    background-color: rgba(255, 255, 255, 0.02);
-
-    th {
-      border-left: 3px solid #13495a;
-    }
-
-    .name {
-      color: #0c7da1;
-    }
-  }
 
   .head-rank, .cell-rank {
     padding-right: 14px;
@@ -72,5 +61,40 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    .avatar {
+      margin-right: 0.5em;
+    }
+  }
+
+
+  tbody tr:first-child {
+    font-size: 22px;
+
+    .cell-rank {
+      font-weight: bold;
+    }
+
+    .avatar img {
+      width: 52px;
+    }
+
+    small {
+      position: relative;
+      top: -2px;
+      font-size: 0.7em;
+    }
+  }
+
+  tr.selected {
+    background-color: rgba(255, 255, 255, 0.02);
+
+    td:first-child {
+      border-left: 3px solid #13495a;
+    }
+
+    .name {
+      color: #0c7da1;
+    }
   }
 }

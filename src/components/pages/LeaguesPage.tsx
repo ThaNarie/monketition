@@ -1,6 +1,6 @@
 import { getMockLeague } from '../../mocks/Leage.mocks';
 import { type League } from '../../types/League';
-import { LeagueGroup } from '../league-group/LeagueGroup';
+import { LeagueGroup } from '../league/league-group/LeagueGroup';
 
 const leagueData: ReadonlyArray<Partial<League>> = [
   getMockLeague({ type: 'continuous' }, { sportType: 'table-tennis' }),
@@ -9,7 +9,7 @@ const leagueData: ReadonlyArray<Partial<League>> = [
   ...Array.from({ length: 30 }, () => getMockLeague()),
 ];
 
-export function Leagues(): JSX.Element {
+export function LeaguesPage(): JSX.Element {
   return (
     <div className="mt-4">
       <h1>Leagues</h1>

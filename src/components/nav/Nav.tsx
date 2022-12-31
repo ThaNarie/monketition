@@ -3,9 +3,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getMockLeague } from '../../mocks/Leage.mocks';
 import './nav.scss';
-import { getMockParticipant } from '../../mocks/Participant.mocks';
 
-const user = getMockParticipant();
+import { me } from '../../data/me';
+
 const leagues = Array.from({ length: 3 }, () => getMockLeague());
 
 export function Nav(): JSX.Element {
@@ -111,13 +111,13 @@ export function Nav(): JSX.Element {
                   alt="avatar2"
                   src="https://i.pravatar.cc/32"
                 />
-                {user.name}
+                {me.name}
               </a>
               <ul className="dropdown-menu">
                 <li className="dropdown-item-text">
-                  {user.streak > 0 ? 'Hot' : 'Cold'} streak{' '}
-                  <span className={`badge text-bg-${user.streak > 0 ? 'danger' : 'primary'}`}>
-                    {Math.abs(user.streak)}
+                  {me.streak > 0 ? 'Hot' : 'Cold'} streak{' '}
+                  <span className={`badge text-bg-${me.streak > 0 ? 'danger' : 'primary'}`}>
+                    {Math.abs(me.streak)}
                   </span>
                 </li>
                 <li>

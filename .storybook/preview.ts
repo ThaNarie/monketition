@@ -1,5 +1,6 @@
 import { themes } from '@storybook/theming';
 import { withRouter } from './withRouter';
+import '../src/index.css';
 
 const hasDarkModeEnabled =
   window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;

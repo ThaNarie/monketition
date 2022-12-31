@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useMount } from '@mediamonks/react-hooks';
 import classNames from 'clsx';
-import { useRef, useState } from 'react';
-import { useIsStuck } from '../../hooks/useIsStuck';
-import { type League } from '../../types/League';
+import { useIsStuck } from '../../../hooks/useIsStuck';
+import { type League } from '../../../types/League';
 import './league-table.scss';
 
 type LeagueTableProps = {
@@ -32,11 +30,11 @@ export function LeagueTable({ results }: LeagueTableProps): JSX.Element {
         </tr>
       </thead>
       <tbody className="table-group-divider">
-        {results.map((result, index) => (
+        {results?.map((result, index) => (
           <tr key={result.rank} className={classNames({ selected: index === 4 })}>
-            <th className="cell-rank" style={{ textAlign: 'right' }} scope="row">
+            <td className="cell-rank" style={{ textAlign: 'right' }}>
               {result.rank}
-            </th>
+            </td>
             <td className="participant">
               <div className="avatar">
                 <img

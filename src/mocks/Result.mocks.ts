@@ -8,8 +8,8 @@ export function getMockResult(fields: Partial<Result> = {}): Result {
     fields.score ??
     (fields.rank &&
       faker.datatype.number({
-        min: 3000 - fields.rank * 100,
-        max: 3000 - (fields.rank - 1) * 100,
+        min: 3000 - fields.rank * 70,
+        max: 3000 - (fields.rank - 1) * 70,
       }));
 
   return {

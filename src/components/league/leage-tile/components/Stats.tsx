@@ -1,5 +1,5 @@
 import { format, formatDistanceToNowStrict } from 'date-fns';
-import { type League } from '../../../types/League';
+import { type League } from '../../../../types/League';
 import { StatItem } from './StatItem';
 import './stats.scss';
 
@@ -45,6 +45,7 @@ export function Stats({ lastMatch, endAt, results }: StatsProps): JSX.Element {
         )}
       </div>
       <div className="schedule-stats">
+        {/* TODO: also show start time for upcoming leagues */}
         {endAt && (
           <StatItem
             icon="calendar_month"
