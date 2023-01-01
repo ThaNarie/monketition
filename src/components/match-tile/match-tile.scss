@@ -41,7 +41,7 @@
     text-align: center;
   }
 
-  .participants, .game-score, .set-score {
+  .game-score, .set-score {
     display: flex;
     flex-direction: row;
 
@@ -61,10 +61,48 @@
   }
 
   .participants {
-    margin-top: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 8px 0 12px 0;
 
-    .is-me {
-      color: var(--player-name) !important;
+    & > * {
+      &:first-child, &:last-child {
+        width: 50%;
+      }
+      &:first-child {
+        text-align: left;
+      }
+      &:last-child {
+        text-align: right;
+      }
+    }
+
+    .participant {
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+
+      &.is-me {
+        color: var(--player-name) !important;
+      }
+
+      .name {
+        //flex-basis: content;
+        display: inline-block;
+      }
+
+      .line {
+        flex-grow: 1;
+        flex-basis: 10px;
+        flex-shrink: 0;
+        //min-width: 20px;
+        display: inline-block;
+        //width: 100%;
+        height: 7px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        margin: 0 10px;
+      }
     }
   }
 
@@ -90,10 +128,32 @@
     }
   }
 
+  .match-details {
+    display: flex;
+
+    .info {
+      flex-basis: 100px;
+      flex-grow: 2;
+
+      &.info-right {
+        text-align: right;
+      }
+
+      .elo {
+        display: inline-block;
+
+        .elo-change {
+        }
+      }
+    }
+  }
+
+
   .game-score {
     .winner, .loser {
       display: inline-block;
       padding: 2px 0;
+      vertical-align: top;
     }
     .winner {
       padding-left: 5px;

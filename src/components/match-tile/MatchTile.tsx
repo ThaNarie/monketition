@@ -31,49 +31,78 @@ export function MatchTile({ className, match, me }: MatchTileProps): JSX.Element
             <small>{format(match.playedAt, 'd LLL y H:mm ')}</small>
           </div>
         )}
+
         <div className="participants">
-          <h4
-            className={classNames(winnerIndex === 0 ? 'winner' : 'loser', {
+          <h5
+            className={classNames('participant', winnerIndex === 0 ? 'winner' : 'loser', {
               'is-me': match.participants[0] === me,
             })}
           >
-            {match.participants[0].name}
-          </h4>
+            <div className="name">
+              <span>{match.participants[0].name}</span>
+            </div>
+            <span className="line"></span>
+          </h5>
           <span className="versus text-muted">vs</span>
-          <h4
-            className={classNames(winnerIndex === 1 ? 'winner' : 'loser', {
+          <h5
+            className={classNames('participant', winnerIndex === 1 ? 'winner' : 'loser', {
               'is-me': match.participants[1] === me,
             })}
           >
-            {match.participants[1].name}
-          </h4>
+            <span className="line"></span>
+            <div className="name">
+              <span>{match.participants[1].name}</span>
+            </div>
+          </h5>
         </div>
-        <div className="game-score">
-          <div>
-            <h4 className={winnerIndex === 0 ? 'winner' : 'loser'}>{match.gameScore[0].score}</h4>
+
+        <div className="match-details">
+          <div className="info info-left">
+            <span className="elo">
+              <div>2345</div>
+              <small className="elo-change text-end text-success">+34</small>
+            </span>
           </div>
-          <small className="text-muted"></small>
-          <div>
-            <h4 className={winnerIndex === 1 ? 'winner' : 'loser'}>{match.gameScore[1].score}</h4>
-          </div>
-        </div>
-        <div className="set-scores">
-          {match.setScores.map((set, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div className="set-score" key={index}>
+          <div className="scores">
+            <div className="game-score">
               <div>
-                <span className={classNames(set[0].score > set[1].score ? 'winner' : 'loser')}>
-                  {set[0].score}
-                </span>
+                <h4 className={winnerIndex === 0 ? 'winner' : 'loser'}>
+                  {match.gameScore[0].score}
+                </h4>
               </div>
               <small className="text-muted"></small>
               <div>
-                <span className={classNames(set[1].score > set[0].score ? 'winner' : 'loser')}>
-                  {set[1].score}
-                </span>
+                <h4 className={winnerIndex === 1 ? 'winner' : 'loser'}>
+                  {match.gameScore[1].score}
+                </h4>
               </div>
             </div>
-          ))}
+
+            <div className="set-scores">
+              {match.setScores.map((set, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <div className="set-score" key={index}>
+                  <div>
+                    <span className={classNames(set[0].score > set[1].score ? 'winner' : 'loser')}>
+                      {set[0].score}
+                    </span>
+                  </div>
+                  <small className="text-muted"></small>
+                  <div>
+                    <span className={classNames(set[1].score > set[0].score ? 'winner' : 'loser')}>
+                      {set[1].score}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="info info-right">
+            <span className="elo">
+              <div>2108</div>
+              <small className="elo-change text-danger">-12</small>
+            </span>
+          </div>
         </div>
       </div>
       <div className="card-footer">
