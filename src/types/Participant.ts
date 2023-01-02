@@ -4,5 +4,7 @@ export type Participant = {
   name: string;
   office: OfficeLocation;
   jobType: string;
-  streak: number;
+  currentStreak: number;
+  bestStreak: number;
+  worstStreak: number;
 };

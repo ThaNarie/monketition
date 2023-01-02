@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import Chart from 'react-apexcharts';
+import { BarChart } from '../../../atoms/bar-chart/BarChart';
 
 export function ActivityChart(): JSX.Element {
   // TODO: calculate amount of matches on each day, and fill splice and pad up to 50 items
@@ -8,72 +9,5 @@ export function ActivityChart(): JSX.Element {
     [],
   );
 
-  return (
-    <Chart
-      options={{
-        chart: {
-          id: 'basic-bar',
-          toolbar: {
-            show: false,
-          },
-          sparkline: {
-            enabled: true,
-          },
-        },
-        plotOptions: {
-          bar: {
-            // columnWidth: '8px',
-          },
-        },
-        colors: ['#ffffff'],
-        dataLabels: {
-          enabled: false,
-        },
-        xaxis: {
-          categories: seriesData,
-          axisBorder: {
-            show: false,
-          },
-          axisTicks: {
-            show: false,
-          },
-          labels: {
-            show: false,
-          },
-        },
-        yaxis: {
-          show: false,
-        },
-        grid: {
-          show: false,
-          padding: {
-            left: 0,
-            right: 0,
-          },
-        },
-        legend: {
-          show: false,
-        },
-        tooltip: {
-          enabled: false,
-        },
-        states: {
-          hover: {
-            filter: {
-              type: 'none',
-            },
-          },
-        },
-      }}
-      series={[
-        {
-          name: 'series-1',
-          data: seriesData,
-        },
-      ]}
-      type="bar"
-      width="100%"
-      height="25"
-    />
-  );
+  return <BarChart dataPoints={seriesData} height={25} amount={50} />;
 }

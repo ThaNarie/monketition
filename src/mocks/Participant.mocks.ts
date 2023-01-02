@@ -18,9 +18,11 @@ export function getMockParticipant(
       'buenos-aires',
     ]),
     jobType: faker.name.jobTitle(),
-    streak:
-      fields.streak ??
+    currentStreak:
+      fields.currentStreak ??
       Math.ceil(faker.datatype.number({ max: 10, precision: 0.0001 }) ** 4 / 1000) *
         (Math.random() > 0.5 ? 1 : -1),
+    bestStreak: fields.bestStreak ?? 1 + faker.datatype.number(10),
+    worstStreak: fields.worstStreak ?? -1 - faker.datatype.number(10),
   };
 }

@@ -51,13 +51,16 @@ export function getMockLeague(
   fields: Partial<League> = {},
   { sportType, status }: MockOptions = {},
 ): League {
+  const league = {} as League;
   const name = faker.random.words(2);
   const matches =
     Math.random() > 0.8
       ? []
-      : [getMockMatch(), getMockMatch(), getMockMatch({ recent: true })].sort(
-          (a, b) => a.playedAt.getTime() - b.playedAt.getTime(),
-        );
+      : [
+          getMockMatch({ league }),
+          getMockMatch({ league }),
+          getMockMatch({ league }, { recent: true }),
+        ].sort((a, b) => a.playedAt.getTime() - b.playedAt.getTime());
   // eslint-disable-next-line no-param-reassign
   const type = fields.type ?? faker.helpers.arrayElement(['continuous', 'season', 'tournament']);
 

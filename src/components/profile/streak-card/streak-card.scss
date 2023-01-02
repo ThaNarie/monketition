@@ -1,0 +1,33 @@
+.streak-card {
+  overflow: hidden;
+
+  .streak-record {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+
+    .streak-record-line {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .label {
+      display: inline-block;
+      min-width: 80px;
+    }
+  }
+
+  .sport-info {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .chart {
+    opacity: 0.4;
+  }
+
+  .chart-streak {
+    position: relative;
+    top: -11px;
+  }
+}

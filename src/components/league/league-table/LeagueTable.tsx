@@ -3,6 +3,7 @@ import classNames from 'clsx';
 import { useIsStuck } from '../../../hooks/useIsStuck';
 import { type League } from '../../../types/League';
 import './league-table.scss';
+import { StreakInfo } from '../../atoms/streak-info/StreakInfo';
 
 type LeagueTableProps = {
   results: League['results'];
@@ -56,15 +57,11 @@ export function LeagueTable({ results }: LeagueTableProps): JSX.Element {
             </td>
             <td style={{ textAlign: 'right' }}>{result.score}</td>
             <td style={{ textAlign: 'center' }}>
-              {result.participant.streak > 2 && (
-                <span className="material-symbols-outlined text-danger">local_fire_department</span>
-              )}
-              {result.participant.streak < -2 && (
-                <span className="material-symbols-outlined text-primary">ac_unit</span>
-              )}
-              {Math.abs(result.participant.streak) > 2
-                ? ` ${Math.abs(result.participant.streak)}`
-                : ''}
+              <StreakInfo
+                streak={result.participant.currentStreak}
+                range={2}
+                iconSize={index === 0 ? 24 : 18}
+              />
             </td>
           </tr>
         ))}

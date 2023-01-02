@@ -1,13 +1,49 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import classNames from 'clsx';
 import { format } from 'date-fns';
-import { getMockSport } from '../../mocks/Sport.mocks';
 import { type Match } from '../../types/Match';
 import './match-tile.scss';
 import { type Participant } from '../../types/Participant';
 import { OfficeInfo } from '../atoms/office-info/OfficeInfo';
 import { SportInfo } from '../atoms/sport-info/SportInfo';
-import { sportIcons } from '../league/leage-tile/LeagueTile';
+
+type EloInfoProps = {
+  elo: Match['eloInfo'][number];
+};
+function EloInfo({ elo }: EloInfoProps): JSX.Element {
+  return (
+    <span className="elo">
+      <div>{elo.scoreBefore}</div>
+      <small
+        className={classNames('elo-change text-end', {
+          'text-success': elo.scoreChange > 0,
+          'text-danger': elo.scoreChange < 0,
+          'text-muted': elo.scoreChange === 0,
+        })}
+      >
+        {elo.scoreChange > 0 ? '+' : ''}
+        {elo.scoreChange}
+      </small>
+    </span>
+  );
+}
+
+type ParticipantNameProps = {
+  participant: Participant;
+  isWinner: boolean;
+  isMe: boolean;
+};
+function ParticipantName({ participant, isWinner, isMe }: ParticipantNameProps): JSX.Element {
+  return (
+    <div
+      className={classNames('participant', isWinner ? 'winner' : 'loser', {
+        'is-me': isMe,
+      })}
+    >
+      <h5 className="name">{participant.name}</h5>
+    </div>
+  );
+}
 
 type MatchTileProps = {
   className?: string;
@@ -33,35 +69,22 @@ export function MatchTile({ className, match, me }: MatchTileProps): JSX.Element
         )}
 
         <div className="participants">
-          <h5
-            className={classNames('participant', winnerIndex === 0 ? 'winner' : 'loser', {
-              'is-me': match.participants[0] === me,
-            })}
-          >
-            <div className="name">
-              <span>{match.participants[0].name}</span>
-            </div>
-            <span className="line"></span>
-          </h5>
+          <ParticipantName
+            participant={match.participants[0]}
+            isWinner={winnerIndex === 0}
+            isMe={match.participants[0] === me}
+          />
           <span className="versus text-muted">vs</span>
-          <h5
-            className={classNames('participant', winnerIndex === 1 ? 'winner' : 'loser', {
-              'is-me': match.participants[1] === me,
-            })}
-          >
-            <span className="line"></span>
-            <div className="name">
-              <span>{match.participants[1].name}</span>
-            </div>
-          </h5>
+          <ParticipantName
+            participant={match.participants[1]}
+            isWinner={winnerIndex === 1}
+            isMe={match.participants[1] === me}
+          />
         </div>
 
         <div className="match-details">
           <div className="info info-left">
-            <span className="elo">
-              <div>2345</div>
-              <small className="elo-change text-end text-success">+34</small>
-            </span>
+            <EloInfo elo={match.eloInfo[0]} />
           </div>
           <div className="scores">
             <div className="game-score">
@@ -98,16 +121,13 @@ export function MatchTile({ className, match, me }: MatchTileProps): JSX.Element
             </div>
           </div>
           <div className="info info-right">
-            <span className="elo">
-              <div>2108</div>
-              <small className="elo-change text-danger">-12</small>
-            </span>
+            <EloInfo elo={match.eloInfo[1]} />
           </div>
         </div>
       </div>
       <div className="card-footer">
-        <SportInfo sport={getMockSport({ type: 'table-tennis' })} />
-        <OfficeInfo office="hilversum" />
+        <SportInfo sport={match.league.sport} />
+        <OfficeInfo office={match.league.office} />
       </div>
     </div>
   );

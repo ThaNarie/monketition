@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { type Match } from '../types/Match';
 import { type Participant } from '../types/Participant';
+import { getMockLeague } from './Leage.mocks';
 import { getMockParticipant } from './Participant.mocks';
 
 function playPoint(): 0 | 1 {
@@ -37,9 +38,14 @@ type MockOptions = {
   player1?: Participant;
 };
 
-export function getMockMatch({ recent = false, bestOf = 5, player1 }: MockOptions = {}): Match {
+export function getMockMatch(
+  fields: Partial<Match> = {},
+  { recent = false, bestOf = 5, player1 }: MockOptions = {},
+): Match {
   const participants = [player1 ?? getMockParticipant(), getMockParticipant()];
+  const league = fields.league ?? getMockLeague({}, { sportType: 'table-tennis' });
 
+  // TODO: play a game that matches the `league.sport` rules
   const { winner, score, sets } = playGame(bestOf);
 
   const setScores = sets.map((set) =>
@@ -53,6 +59,12 @@ export function getMockMatch({ recent = false, bestOf = 5, player1 }: MockOption
     score: gameScore,
   }));
 
+  const eloInfo = gameResult.map((result, index) => ({
+    participant: result.participant,
+    scoreBefore: 1000 + faker.datatype.number(2000),
+    scoreChange: faker.datatype.number(30) * (index === winner ? 1 : -1),
+  }));
+
   return {
     id: faker.datatype.uuid(),
     participants,
@@ -60,5 +72,7 @@ export function getMockMatch({ recent = false, bestOf = 5, player1 }: MockOption
     playedAt: recent ? faker.date.recent(3) : faker.date.past(1),
     setScores,
     gameScore: gameResult,
+    league,
+    eloInfo,
   };
 }

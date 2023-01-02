@@ -38,7 +38,7 @@ export function Stats({ lastMatch, endAt, results }: StatsProps): JSX.Element {
                 Top player in league with <br />
                 Score: {results?.[0]?.score}
                 <br />
-                Streak: {topPlayer.streak}
+                Streak: {topPlayer.currentStreak}
               </>
             }
           />

@@ -115,9 +115,9 @@ export function Nav(): JSX.Element {
               </a>
               <ul className="dropdown-menu">
                 <li className="dropdown-item-text">
-                  {me.streak > 0 ? 'Hot' : 'Cold'} streak{' '}
-                  <span className={`badge text-bg-${me.streak > 0 ? 'danger' : 'primary'}`}>
-                    {Math.abs(me.streak)}
+                  {me.currentStreak > 0 ? 'Hot' : 'Cold'} streak{' '}
+                  <span className={`badge text-bg-${me.currentStreak > 0 ? 'danger' : 'primary'}`}>
+                    {Math.abs(me.currentStreak)}
                   </span>
                 </li>
                 <li>
