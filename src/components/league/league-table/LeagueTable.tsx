@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import classNames from 'clsx';
+import { startCase } from 'lodash-es';
+import { Link } from 'react-router-dom';
+import { useUser } from '../../../data/me';
 import { useIsStuck } from '../../../hooks/useIsStuck';
 import { type League } from '../../../types/League';
 import './league-table.scss';
@@ -10,6 +13,7 @@ type LeagueTableProps = {
 };
 export function LeagueTable({ results }: LeagueTableProps): JSX.Element {
   const { ref, isStuck } = useIsStuck();
+  const me = useUser();
   return (
     <table
       className={classNames('league-table table table-hover table-borderless', {
@@ -32,7 +36,10 @@ export function LeagueTable({ results }: LeagueTableProps): JSX.Element {
       </thead>
       <tbody className="table-group-divider">
         {results?.map((result, index) => (
-          <tr key={result.rank} className={classNames({ selected: index === 4 })}>
+          <tr
+            key={result.rank}
+            className={classNames({ selected: result.participant.user.id === me.id })}
+          >
             <td className="cell-rank" style={{ textAlign: 'right' }}>
               {result.rank}
             </td>
@@ -41,16 +48,18 @@ export function LeagueTable({ results }: LeagueTableProps): JSX.Element {
                 <img
                   className="rounded-circle shadow-4-strong me-2"
                   alt="avatar2"
-                  src={`https://i.pravatar.cc/32?u=${result.participant.name}`}
+                  src={`https://i.pravatar.cc/32?u=${result.participant.user.name}`}
                 />
               </div>
               <div>
-                <div className="name">{result.participant.name}</div>
+                <Link to={`/profile/${result.participant.user.id}`}>
+                  <div className="name">{result.participant.user.name}</div>
+                </Link>
                 <div>
                   <small>
-                    <span className="text-muted">{result.participant.office}</span>
+                    <span className="text-muted">{startCase(result.participant.user.office)}</span>
                     {' – '}
-                    <span className="text-muted">{result.participant.jobType}</span>
+                    <span className="text-muted">{result.participant.user.jobType}</span>
                   </small>
                 </div>
               </div>

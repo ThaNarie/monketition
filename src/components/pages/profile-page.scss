@@ -1,4 +1,10 @@
 .profile-page {
+  .user-info {
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+    margin-bottom: 32px;
+  }
   .awards {
     display: flex;
     flex-direction: row;

@@ -1,9 +1,10 @@
 import classNames from 'clsx';
+import { startCase } from 'lodash-es';
 import { Link } from 'react-router-dom';
 import foosballIcon from '../../../sports/foosball.svg';
 import poolIcon from '../../../sports/pool.svg';
 import tableTennisIcon from '../../../sports/table-tennis.svg';
-import { type League, type LeagueType } from '../../../types/League';
+import { type League } from '../../../types/League';
 import { type SportType } from '../../../types/Sport';
 import { LeagueTitle } from '../league-title/LeagueTitle';
 import { ActivityChart } from './components/ActivityChart';
@@ -42,10 +43,12 @@ export function LeagueTile({
             {name}
           </LeagueTitle>
         </Link>
-        {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
-        <div className={classNames('office', { 'my-office': office === 'hilversum' })}>
-          <span className="badge text-bg-dark">{office}</span>
-        </div>
+        {office && (
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          <div className={classNames('office', { 'my-office': office === 'hilversum' })}>
+            <span className="badge text-bg-dark">{startCase(office)}</span>
+          </div>
+        )}
         <p className="card-text description">{description}</p>
         <div className="chart">
           <ActivityChart />

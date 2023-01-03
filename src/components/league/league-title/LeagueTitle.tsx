@@ -1,11 +1,7 @@
 import { type PropsWithChildren } from 'react';
 import { type LeagueType } from '../../../types/League';
-
-export const leagueIcons: Partial<Record<LeagueType, string>> = {
-  continuous: 'tools_ladder',
-  season: 'calendar_month',
-  tournament: 'family_history',
-};
+import { Icon } from '../../atoms/icon/Icon';
+import { leagueIcons } from '../../atoms/league-info/LeagueInfo';
 
 type LeagueTitleProps = {
   as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -22,7 +18,7 @@ export function LeagueTitle({
     <Tag style={{ display: 'inline-block' }}>
       {type && (
         <>
-          <span className="material-symbols-outlined">{leagueIcons[type]}</span>{' '}
+          <Icon icon={leagueIcons[type]!} />{' '}
         </>
       )}
       {children}

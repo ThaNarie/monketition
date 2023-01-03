@@ -108,14 +108,18 @@
         border-top: 1px solid rgba(255, 255, 255, 0.2);
       }
 
+      a {
+        text-decoration: none;
+      }
+
       .name {
         display: inline;
         position: relative;
-        background-color: var(--bs-card-bg);
-        box-decoration-break: clone;
-        -webkit-box-decoration-break: clone;
         padding-top: 1px;
         padding-bottom: 2px;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        background-color: var(--bs-card-bg);
       }
     }
   }
@@ -125,7 +129,7 @@
       .is-me {
         // TODO with color
         .name {
-          color: hsl(194, 93, 63);
+          color: hsl(194deg, 93%, 63%);
         }
       }
     }

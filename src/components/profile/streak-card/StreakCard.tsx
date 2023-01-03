@@ -42,22 +42,24 @@ export function StreakCard({ streakInfo, sport }: StreakCardProps): JSX.Element 
             <span className="label">Current</span>{' '}
             <StreakInfo streak={streakInfo.currentStreak} reverse />
           </div>
-          <div className="chart chart-elo">
-            <BarChart
-              type="line"
-              dataPoints={eloRecord}
-              height={50}
-              color={getEloColor}
-              amount={50}
-            />
-          </div>
-          <div className="chart chart-streak">
-            <BarChart
-              dataPoints={streakRecord.map(() => 1)}
-              height={5}
-              color={getColor}
-              amount={50}
-            />
+          <div className="mb-3">
+            <div className="chart chart-elo">
+              <BarChart
+                type="line"
+                dataPoints={eloRecord}
+                height={50}
+                color={getEloColor}
+                amount={50}
+              />
+            </div>
+            <div className="chart chart-streak">
+              <BarChart
+                dataPoints={streakRecord.map(() => 1)}
+                height={5}
+                color={getColor}
+                amount={50}
+              />
+            </div>
           </div>
           <div className="streak-record-line">
             <span className="label">Best</span>{' '}

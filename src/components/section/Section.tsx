@@ -1,6 +1,21 @@
+import classNames from 'clsx';
 import { type PropsWithChildren } from 'react';
 import './section.scss';
 
-export function Section({ children }: PropsWithChildren): JSX.Element {
-  return <div className="section">{children}</div>;
+type SectionProps = {
+  className?: string;
+  heading?: string;
+};
+
+export function Section({
+  children,
+  heading,
+  className,
+}: PropsWithChildren<SectionProps>): JSX.Element {
+  return (
+    <div className={classNames('section', className)}>
+      {heading && <h3>{heading}</h3>}
+      {children}
+    </div>
+  );
 }

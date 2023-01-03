@@ -12,6 +12,7 @@ import { LeaguePage } from './components/pages/LeaguePage';
 import { LeaguesPage } from './components/pages/LeaguesPage';
 import { ProfilePage } from './components/pages/ProfilePage';
 import './index.css';
+import { me, UserContext } from './data/me';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.querySelector('#root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserContext.Provider value={me}>
+      <RouterProvider router={router} />
+    </UserContext.Provider>
   </React.StrictMode>,
 );

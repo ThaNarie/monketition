@@ -1,7 +1,9 @@
+import { Icon, type IconProps } from '../icon/Icon';
+
 type StreakInfoProps = {
   streak: number;
   range?: number;
-  iconSize?: 18 | 24 | 36 | 48;
+  iconSize?: IconProps['size'];
   reverse?: boolean;
 };
 
@@ -19,14 +21,8 @@ export function StreakInfo({
   return (
     <span className="streak-info">
       {reverse && `${label} `}
-      {streak > 0 && (
-        <span className={`material-symbols-outlined text-danger md-${iconSize}`}>
-          local_fire_department
-        </span>
-      )}
-      {streak < 0 && (
-        <span className={`material-symbols-outlined text-primary md-${iconSize}`}>ac_unit</span>
-      )}
+      {streak > 0 && <Icon icon="local_fire_department" className="text-danger" size={iconSize} />}
+      {streak < 0 && <Icon icon="ac_unit" className="text-primary" size={iconSize} />}
       {!reverse && ` ${label}`}
     </span>
   );

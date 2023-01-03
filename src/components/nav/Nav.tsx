@@ -1,14 +1,14 @@
 import classNames from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { me, useUser } from '../../data/me';
 import { getMockLeague } from '../../mocks/Leage.mocks';
+import { Icon } from '../atoms/icon/Icon';
 import './nav.scss';
 
-import { me } from '../../data/me';
-
-const leagues = Array.from({ length: 3 }, () => getMockLeague());
-
 export function Nav(): JSX.Element {
+  const me = useUser();
+
   const [isScrolling, setIsScrolling] = useState(false);
   const updateScrolling = useCallback(() => {
     const scrollPosition = document.querySelector('#root')?.scrollTop ?? 0;
@@ -18,6 +18,7 @@ export function Nav(): JSX.Element {
       setIsScrolling(false);
     }
   }, []);
+
   useEffect(() => {
     document.querySelector('#root')?.addEventListener('scroll', updateScrolling);
     // updateScrolling();
@@ -25,6 +26,7 @@ export function Nav(): JSX.Element {
       document.querySelector('#root')?.removeEventListener('scroll', updateScrolling);
     };
   }, [updateScrolling]);
+
   return (
     <nav
       className={classNames('navbar sticky-top navbar-expand-lg bg-body-tertiary', {
@@ -64,13 +66,16 @@ export function Nav(): JSX.Element {
                 <li key="heading">
                   <h6 className="dropdown-header">Your leagues</h6>
                 </li>
-                {leagues.map((league) => (
-                  <li key={league.id}>
-                    <Link className="dropdown-item" to={`/leagues/${league.slug}`}>
-                      {league.name}
-                    </Link>
-                  </li>
-                ))}
+                {me.participants
+                  .map(({ league }) => league)
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((league) => (
+                    <li key={league.id}>
+                      <Link className="dropdown-item" to={`/leagues/${league.slug}`}>
+                        {league.name}
+                      </Link>
+                    </li>
+                  ))}
                 <li key="divider">
                   <hr className="dropdown-divider" />
                 </li>
@@ -114,25 +119,29 @@ export function Nav(): JSX.Element {
                 {me.name}
               </a>
               <ul className="dropdown-menu">
-                <li className="dropdown-item-text">
-                  {me.currentStreak > 0 ? 'Hot' : 'Cold'} streak{' '}
-                  <span className={`badge text-bg-${me.currentStreak > 0 ? 'danger' : 'primary'}`}>
-                    {Math.abs(me.currentStreak)}
+                <li className="dropdown-item-text text-muted d-flex justify-content-between align-items-center">
+                  {me.participants[0]?.currentStreak > 0 ? 'Hot' : 'Cold'} streak{' '}
+                  <span
+                    className={`badge rounded-pill text-bg-${
+                      me.participants[0]?.currentStreak > 0 ? 'danger' : 'primary'
+                    }`}
+                  >
+                    {Math.abs(me.participants[0]?.currentStreak)}
                   </span>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to="/profile/me">
-                    Your profile
-                  </Link>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
-                <li>
-                  <Link className="dropdown-item" to="/">
-                    Log out
-                  </Link>
-                </li>
+                <Link className="dropdown-item" to="/profile/me">
+                  <li className="d-flex justify-content-start align-items-end column-gap-2">
+                    <Icon icon="person" size={18} /> <span>Your profile</span>
+                  </li>
+                </Link>
+                <Link className="dropdown-item" to="/">
+                  <li className="d-flex justify-content-start align-items-end column-gap-2">
+                    <Icon icon="logout" size={18} /> <span>Log out</span>
+                  </li>
+                </Link>
               </ul>
             </li>
           </ul>

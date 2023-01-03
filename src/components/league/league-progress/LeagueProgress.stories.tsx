@@ -26,33 +26,51 @@ export const Versions: StoryObj = {
       <div>
         <h3 className="mb-5">Upcoming</h3>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'continuous' }, { status: 'upcoming' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'continuous' }, status: 'upcoming' })}
+          />
         </div>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'season' }, { status: 'upcoming' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'season' }, status: 'upcoming' })}
+          />
         </div>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'tournament' }, { status: 'upcoming' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'tournament' }, status: 'upcoming' })}
+          />
         </div>
         <h3 className="mb-5">Ongoing</h3>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'continuous' }, { status: 'ongoing' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'continuous' }, status: 'ongoing' })}
+          />
         </div>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'season' }, { status: 'ongoing' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'season' }, status: 'ongoing' })}
+          />
         </div>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'tournament' }, { status: 'ongoing' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'tournament' }, status: 'ongoing' })}
+          />
         </div>
         <h3 className="mb-5">Finished</h3>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'continuous' }, { status: 'finished' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'continuous' }, status: 'finished' })}
+          />
         </div>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'season' }, { status: 'finished' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'season' }, status: 'finished' })}
+          />
         </div>
         <div style={{ width: 300 }} className="mb-5">
-          <LeagueProgress league={getMockLeague({ type: 'tournament' }, { status: 'finished' })} />
+          <LeagueProgress
+            league={getMockLeague({ fields: { type: 'tournament' }, status: 'finished' })}
+          />
         </div>
       </div>
     );

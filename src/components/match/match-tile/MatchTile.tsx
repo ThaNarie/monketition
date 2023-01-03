@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import classNames from 'clsx';
 import { format } from 'date-fns';
-import { type Match } from '../../types/Match';
+import { Link } from 'react-router-dom';
+import { useProfileUser, useUser } from '../../../data/me';
+import { type Match } from '../../../types/Match';
 import './match-tile.scss';
-import { type Participant } from '../../types/Participant';
-import { OfficeInfo } from '../atoms/office-info/OfficeInfo';
-import { SportInfo } from '../atoms/sport-info/SportInfo';
+import { type Participant } from '../../../types/Participant';
+import { OfficeInfo } from '../../atoms/office-info/OfficeInfo';
+import { SportInfo } from '../../atoms/sport-info/SportInfo';
 
 type EloInfoProps = {
   elo: Match['eloInfo'][number];
@@ -31,16 +33,19 @@ function EloInfo({ elo }: EloInfoProps): JSX.Element {
 type ParticipantNameProps = {
   participant: Participant;
   isWinner: boolean;
-  isMe: boolean;
 };
-function ParticipantName({ participant, isWinner, isMe }: ParticipantNameProps): JSX.Element {
+function ParticipantName({ participant, isWinner }: ParticipantNameProps): JSX.Element {
+  const me = useUser();
+
   return (
     <div
       className={classNames('participant', isWinner ? 'winner' : 'loser', {
-        'is-me': isMe,
+        'is-me': participant.user.id === me.id,
       })}
     >
-      <h5 className="name">{participant.name}</h5>
+      <Link to={`/profile/${participant.user.id}`}>
+        <h5 className="name">{participant.user.name}</h5>
+      </Link>
     </div>
   );
 }
@@ -48,17 +53,23 @@ function ParticipantName({ participant, isWinner, isMe }: ParticipantNameProps):
 type MatchTileProps = {
   className?: string;
   match: Match;
-  me?: Participant;
 };
 
-export function MatchTile({ className, match, me }: MatchTileProps): JSX.Element {
+export function MatchTile({ className, match }: MatchTileProps): JSX.Element {
   const winnerIndex = match.gameScore[0].score > match.gameScore[1].score ? 0 : 1;
+  const me = useUser();
+  const profileUser = useProfileUser() ?? me;
+
+  function isProfileUser(participant: Participant): boolean {
+    return participant.user.id === profileUser.id;
+  }
+
   return (
     <div
       className={classNames(
         'card match-tile',
         className,
-        match.participants[winnerIndex] === me ? 'match-winner' : 'match-loser',
+        isProfileUser(match.winner) ? 'match-winner' : 'match-loser',
       )}
     >
       <div className="card-body">
@@ -69,17 +80,9 @@ export function MatchTile({ className, match, me }: MatchTileProps): JSX.Element
         )}
 
         <div className="participants">
-          <ParticipantName
-            participant={match.participants[0]}
-            isWinner={winnerIndex === 0}
-            isMe={match.participants[0] === me}
-          />
+          <ParticipantName participant={match.participants[0]} isWinner={winnerIndex === 0} />
           <span className="versus text-muted">vs</span>
-          <ParticipantName
-            participant={match.participants[1]}
-            isWinner={winnerIndex === 1}
-            isMe={match.participants[1] === me}
-          />
+          <ParticipantName participant={match.participants[1]} isWinner={winnerIndex === 1} />
         </div>
 
         <div className="match-details">

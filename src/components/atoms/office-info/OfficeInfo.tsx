@@ -1,5 +1,7 @@
+import { startCase } from 'lodash-es';
 import { type OfficeLocation } from '../../../types/League';
 import './office-info.scss';
+import { Icon } from '../icon/Icon';
 
 type OfficeInfoProps = {
   office?: OfficeLocation;
@@ -8,7 +10,7 @@ type OfficeInfoProps = {
 export function OfficeInfo({ office }: OfficeInfoProps): JSX.Element | null {
   return office ? (
     <div className="office-info">
-      <span className="material-symbols-outlined md-18">apartment</span> {office}
+      <Icon icon="apartment" size={18} /> {startCase(office)}
     </div>
   ) : null;
 }

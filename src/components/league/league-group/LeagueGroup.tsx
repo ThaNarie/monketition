@@ -1,4 +1,6 @@
 import classNames from 'clsx';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { type League } from '../../../types/League';
 import { Section } from '../../section/Section';
 import { LeagueTile } from '../leage-tile/LeagueTile';
@@ -10,6 +12,7 @@ type LeagueGroupProps = {
   groupName: string;
   description?: string;
   leagues?: ReadonlyArray<Partial<League>>;
+  showMoreButton?: boolean;
 };
 
 export function LeagueGroup({
@@ -17,11 +20,11 @@ export function LeagueGroup({
   groupName,
   description,
   leagues,
+  showMoreButton = false,
 }: LeagueGroupProps): JSX.Element {
   return (
     <div className={classNames('league-group', className)}>
-      <Section>
-        <h2>{groupName}</h2>
+      <Section heading={groupName}>
         <div className="info mb-4">{description && <p>{description}</p>}</div>
         <div className="row row-cols-1 row-cols-lg-2 g-4">
           {leagues ? (
@@ -34,6 +37,13 @@ export function LeagueGroup({
             <ComingSoonCard />
           )}
         </div>
+        {showMoreButton && (
+          <Link to="/leagues">
+            <Button variant="outline-success" className="mt-3">
+              View all leagues
+            </Button>
+          </Link>
+        )}
       </Section>
     </div>
   );

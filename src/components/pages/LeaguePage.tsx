@@ -1,26 +1,25 @@
-import { format } from 'date-fns';
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { leagues } from '../../data/createMockData';
 import { getMockLeague } from '../../mocks/Leage.mocks';
-import { type LeagueType } from '../../types/League';
+import { EntityInfo } from '../atoms/entity-info/EntityInfo';
+import { LeagueInfo } from '../atoms/league-info/LeagueInfo';
 import { OfficeInfo } from '../atoms/office-info/OfficeInfo';
 import { SportInfo } from '../atoms/sport-info/SportInfo';
-import { sportIcons } from '../league/leage-tile/LeagueTile';
 import { LeagueProgress } from '../league/league-progress/LeagueProgress';
 import { LeagueTable } from '../league/league-table/LeagueTable';
-import { leagueIcons, LeagueTitle } from '../league/league-title/LeagueTitle';
-import './league.scss';
-
-const leagueData = getMockLeague();
-
-const leagueTypeMap: Record<LeagueType, string> = {
-  continuous: 'Permanent Ladder',
-  season: 'Season Ladder',
-  tournament: 'Tournament',
-};
+import './league-page.scss';
 
 export function LeaguePage(): JSX.Element {
   const { id } = useParams();
+
+  // if id is not found, get a random entry from the leagues array
+  const leagueData = useMemo(
+    () =>
+      leagues.find((league) => league.slug === id) ??
+      leagues[Math.floor(Math.random() * leagues.length)],
+    [id],
+  );
   return (
     <div className="league-page">
       <nav aria-label="breadcrumb" className="mb-4 mt-3" style={{ borderBottom: '1px solid #444' }}>
@@ -35,16 +34,11 @@ export function LeaguePage(): JSX.Element {
       </nav>
 
       <h1>{leagueData.name}</h1>
-      <div className="basic-info">
-        {leagueData.sport && <SportInfo sport={leagueData.sport} />}
-        {leagueData.type && (
-          <div>
-            <span className="material-symbols-outlined md-18">{leagueIcons[leagueData.type]}</span>{' '}
-            {leagueTypeMap[leagueData.type]}
-          </div>
-        )}
-        {leagueData.office && <OfficeInfo office={leagueData.office} />}
-      </div>
+      <EntityInfo>
+        <SportInfo sport={leagueData.sport} />
+        <LeagueInfo type={leagueData.type} />
+        <OfficeInfo office={leagueData.office} />
+      </EntityInfo>
 
       <div className="row gx-5">
         <div className="col-lg-4 order-lg-last" style={{ marginTop: 40 }}>

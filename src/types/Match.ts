@@ -8,8 +8,14 @@ export type Match = {
   playedAt: Date;
   participants: Array<Participant>;
   winner: Participant;
+  loser: Participant;
   gameScore: Array<MatchScoreInfo>;
   setScores: Array<Array<MatchScoreInfo>>;
   league: League;
-  eloInfo: Array<{ participant: Participant; scoreBefore: number; scoreChange: number }>;
+  eloInfo: Array<{
+    participant: Participant;
+    scoreBefore: number;
+    newScore: number;
+    scoreChange: number;
+  }>;
 };

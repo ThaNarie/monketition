@@ -32,7 +32,7 @@ export function Stats({ lastMatch, endAt, results }: StatsProps): JSX.Element {
         {topPlayer && (
           <StatItem
             icon="person"
-            label={topPlayer.name}
+            label={topPlayer.user.name}
             tooltip={
               <>
                 Top player in league with <br />

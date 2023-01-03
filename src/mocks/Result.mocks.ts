@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-types,no-empty-pattern */
 import { faker } from '@faker-js/faker';
+import { type League } from '../types/League';
 import { type Result } from '../types/Result';
 import { getMockParticipant } from './Participant.mocks';
 
-export function getMockResult(fields: Partial<Result> = {}): Result {
+type MockOptions = {
+  fields?: Partial<Result>;
+  forLeague: League;
+};
+export function getMockResult({ fields = {}, forLeague }: MockOptions): Result {
   const score =
     fields.score ??
     (fields.rank &&
@@ -14,7 +19,7 @@ export function getMockResult(fields: Partial<Result> = {}): Result {
 
   return {
     id: faker.datatype.uuid(),
-    participant: getMockParticipant(),
+    participant: fields.participant ?? getMockParticipant({ fields: { league: forLeague } }),
     rank: fields.rank ?? faker.datatype.number(100),
     score: score ?? faker.datatype.number(3000),
   };

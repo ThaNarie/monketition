@@ -65,6 +65,14 @@
     .avatar {
       margin-right: 0.5em;
     }
+
+    a {
+      text-decoration: none;
+    }
+
+    .name {
+      color: var(--bs-dark-text, inherit);
+    }
   }
 
 

@@ -1,13 +1,11 @@
-import { getMockLeague } from '../../mocks/Leage.mocks';
-import { type League } from '../../types/League';
+import { matches } from '../../data/createMockData';
+import { useUser } from '../../data/me';
 import { LeagueGroup } from '../league/league-group/LeagueGroup';
+import { RecentMatches } from '../match/recent-matches/RecentMatches';
 
-const leagueData: Array<Partial<League>> = [
-  getMockLeague({ type: 'continuous' }, { sportType: 'table-tennis' }),
-  getMockLeague({ type: 'season' }, { sportType: 'pool' }),
-  getMockLeague({ type: 'tournament' }, { sportType: 'foosball' }),
-];
 export function HomePage(): JSX.Element {
+  const me = useUser();
+
   return (
     <div className="mt-4">
       <h1>Home</h1>
@@ -18,17 +16,20 @@ export function HomePage(): JSX.Element {
         </p>
         <p>Things to add to this page:</p>
         <ul>
-          <li>Recent matches</li>
+          <li>Your recent matches</li>
           <li>Upcoming and active tournaments</li>
           <li>Profile card with your info</li>
           <li>Suggestions for leagues to participate in at your office location</li>
         </ul>
       </div>
 
+      <RecentMatches matches={matches} />
+
       <LeagueGroup
         groupName="Your leagues"
         description="These are the leagues you are currently participating in."
-        leagues={leagueData}
+        leagues={me.participants.map(({ league }) => league)}
+        showMoreButton
       />
     </div>
   );

@@ -1,15 +1,10 @@
-import { getMockLeague } from '../../mocks/Leage.mocks';
-import { type League } from '../../types/League';
+import { leagues } from '../../data/createMockData';
+import { useUser } from '../../data/me';
 import { LeagueGroup } from '../league/league-group/LeagueGroup';
 
-const leagueData: ReadonlyArray<Partial<League>> = [
-  getMockLeague({ type: 'continuous' }, { sportType: 'table-tennis' }),
-  getMockLeague({ type: 'season' }, { sportType: 'pool' }),
-  getMockLeague({ type: 'tournament' }, { sportType: 'foosball' }),
-  ...Array.from({ length: 30 }, () => getMockLeague()),
-];
-
 export function LeaguesPage(): JSX.Element {
+  const me = useUser();
+
   return (
     <div className="mt-4">
       <h1>Leagues</h1>
@@ -24,12 +19,12 @@ export function LeaguesPage(): JSX.Element {
       <LeagueGroup
         groupName="Your leagues"
         description="These are the leagues you are currently participating in."
-        leagues={leagueData.slice(0, 3)}
+        leagues={me.participants.map(({ league }) => league)}
       />
       <LeagueGroup
         groupName="Continuous Ladder"
         description="Every ladder game you play, unrelated to which season, will count to your permanent record."
-        leagues={leagueData.filter(({ type }) => type === 'continuous').slice(0, 7)}
+        leagues={leagues.filter(({ type }) => type === 'continuous').slice(0, 7)}
       />
       <LeagueGroup
         groupName="Ladder Season"
