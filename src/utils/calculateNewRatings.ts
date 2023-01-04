@@ -22,7 +22,6 @@
  * @returns {object} An object with two properties: `winner`, the new Elo rating for the
  *   winner, and `loser`, the new Elo rating for the loser.
  */
-
 export function calculateNewRatings(
   winnerRating: number,
   loserRating: number,

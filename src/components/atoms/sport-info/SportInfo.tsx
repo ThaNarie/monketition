@@ -1,6 +1,6 @@
 import { startCase } from 'lodash-es';
 import { type Sport } from '../../../types/Sport';
-import { sportIcons } from '../../league/leage-tile/LeagueTile';
+import { sportIcons } from '../../league/leage-card/LeagueCard';
 import './sport-info.scss';
 
 type SportInfoProps = {

@@ -18,7 +18,7 @@ export type League = {
   description?: string;
   rules?: string;
   // season: Season; // TODO back link to parent season holder
-  results?: Array<Result>;
+  results: Array<Result>;
   matches: Array<Match>;
   lastMatch?: Match;
   office?: OfficeLocation;

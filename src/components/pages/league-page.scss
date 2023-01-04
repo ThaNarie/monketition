@@ -4,4 +4,13 @@
     flex-direction: row;
     gap: 16px;
   }
+
+  .league-activity-chart {
+    border-bottom: 1px solid var(--bs-secondary-bg);
+    margin-bottom: 8px;
+
+    & > * {
+      opacity: 0.2;
+    }
+  }
 }

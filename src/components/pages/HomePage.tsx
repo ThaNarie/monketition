@@ -1,14 +1,14 @@
 import { matches } from '../../data/createMockData';
 import { useUser } from '../../data/me';
 import { LeagueGroup } from '../league/league-group/LeagueGroup';
-import { RecentMatches } from '../match/recent-matches/RecentMatches';
+import { MatchListing } from '../match/match-listing/MatchListing';
 
 export function HomePage(): JSX.Element {
   const me = useUser();
 
   return (
     <div className="mt-4">
-      <h1>Home</h1>
+      <h1>Hey {me.name}, welcome back!</h1>
 
       <div className="info mb-5">
         <p>
@@ -23,7 +23,7 @@ export function HomePage(): JSX.Element {
         </ul>
       </div>
 
-      <RecentMatches matches={matches} />
+      <MatchListing matches={matches} display="full" ctaType="external" />
 
       <LeagueGroup
         groupName="Your leagues"

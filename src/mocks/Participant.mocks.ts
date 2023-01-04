@@ -67,9 +67,40 @@ export function findMockParticipant({
 
   // if not, create a new participant for that user
   if (!participant) {
-    participant = getMockParticipant({ fields: { user: newUser, league: forLeague } });
+    participant = getMockParticipant({ bare: true, fields: { user: newUser, league: forLeague } });
     newUser.participants.push(participant);
   }
 
   return participant;
+}
+
+export function updateStreakHistory(participant: Participant): void {
+  let currentStreak = 0;
+  let bestStreak = 0;
+  let worstStreak = 0;
+  let lastResult: 'win' | 'loss' | null = null;
+
+  // console.groupCollapsed('updateStreakHistory - ', participant.user.name);
+
+  for (const match of participant.matches) {
+    const result = match.winner === participant ? 'win' : 'loss';
+    // console.log('result', result);
+
+    if (result !== lastResult) {
+      currentStreak = 0;
+    }
+
+    currentStreak += result === 'win' ? 1 : -1;
+    bestStreak = Math.max(bestStreak, currentStreak);
+    worstStreak = Math.min(worstStreak, currentStreak);
+
+    lastResult = result;
+  }
+
+  participant.currentStreak = currentStreak;
+  participant.bestStreak = bestStreak;
+  participant.worstStreak = worstStreak;
+
+  // console.log({ currentStreak, bestStreak, worstStreak });
+  // console.groupEnd();
 }

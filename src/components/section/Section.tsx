@@ -14,7 +14,7 @@ export function Section({
 }: PropsWithChildren<SectionProps>): JSX.Element {
   return (
     <div className={classNames('section', className)}>
-      {heading && <h3>{heading}</h3>}
+      {heading && <h3 className="mb-4">{heading}</h3>}
       {children}
     </div>
   );

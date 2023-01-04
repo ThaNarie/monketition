@@ -3,21 +3,34 @@ import { type Match } from '../types/Match';
 import { type Participant } from '../types/Participant';
 import { calculateNewRatings } from '../utils/calculateNewRatings';
 import { getMockLeague, updateLeagueResults } from './Leage.mocks';
-import { findMockParticipant, getMockParticipant } from './Participant.mocks';
+import { findMockParticipant } from './Participant.mocks';
 
-function playPoint(): 0 | 1 {
-  return Math.round(Math.random()) as 0 | 1;
+// we use this to slightly influence our random game results
+export function getExpectedWinRatio(playerRating: number, opponentRating: number): number {
+  // used in elo calculation, this is what is expected
+  const winChance = 1 / (1 + 10 ** ((opponentRating - playerRating) / 400));
+
+  // we "dampen" the win chance to make it more realistic
+  const useFactor = 0.1;
+  return winChance * useFactor + (1 - useFactor) / 2;
 }
 
-function playSet(): [number, number] {
+function playPoint(winChance: number): 0 | 1 {
+  return Math.random() < winChance ? 0 : 1;
+}
+
+function playSet(winChance: number): [number, number] {
   const score = [0, 0] as [number, number];
   while ((score[0] < 11 && score[1] < 11) || Math.abs(score[0] - score[1]) < 2) {
-    score[playPoint()] += 1;
+    score[playPoint(winChance)] += 1;
   }
   return score;
 }
 
-export function playGame(bestOf = 3): {
+export function playGame(
+  winChance: number,
+  bestOf = 3,
+): {
   score: [number, number];
   winnerIndex: 0 | 1;
   loserIndex: 0 | 1;
@@ -26,7 +39,7 @@ export function playGame(bestOf = 3): {
   const sets = [];
   const score = [0, 0] as [number, number];
   while (score[0] < bestOf / 2 && score[1] < bestOf / 2) {
-    const set = playSet();
+    const set = playSet(winChance);
     sets.push(set);
     score[set[0] > set[1] ? 0 : 1] += 1;
   }
@@ -60,8 +73,10 @@ export function getMockMatch({
     player2 ?? findMockParticipant({ forLeague: league }),
   ];
 
+  const winChance = getExpectedWinRatio(participants[0].eloScore, participants[1].eloScore);
+
   // TODO: play a game that matches the `league.sport` rules
-  const { winnerIndex, loserIndex, score, sets } = playGame(bestOf);
+  const { winnerIndex, loserIndex, score, sets } = playGame(winChance, bestOf);
   const winner = participants[winnerIndex];
   const loser = participants[loserIndex];
 
@@ -96,7 +111,7 @@ export function getMockMatch({
     participants,
     winner,
     loser,
-    playedAt: recent ? faker.date.recent(3) : faker.date.past(1),
+    playedAt: fields.playedAt ?? (recent ? faker.date.recent(3) : faker.date.past(1)),
     setScores,
     gameScore: gameResult,
     league,
@@ -117,6 +132,7 @@ export function getMockMatch({
   }
 
   league.matches.push(match);
+  league.lastMatch = match;
 
   updateLeagueResults(league, match);
 

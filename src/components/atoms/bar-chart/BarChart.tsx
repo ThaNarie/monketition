@@ -39,7 +39,7 @@ export function BarChart({
         },
         plotOptions: {
           bar: {
-            columnWidth: '100%',
+            // columnWidth: '100%',
           },
         },
         colors: [color],

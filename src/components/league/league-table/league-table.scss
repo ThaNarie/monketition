@@ -62,7 +62,7 @@
     flex-direction: row;
     align-items: center;
 
-    .avatar {
+    .avatar-container {
       margin-right: 0.5em;
     }
 
@@ -83,7 +83,7 @@
       font-weight: bold;
     }
 
-    .avatar img {
+    .avatar-container img {
       width: 52px;
     }
 
@@ -103,6 +103,14 @@
 
     .name {
       color: #0c7da1;
+    }
+  }
+
+  tr.dangling {
+    td {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      // TODO: not working, only middle cell gets the margin applied
+      //margin-top: 7px;
     }
   }
 }

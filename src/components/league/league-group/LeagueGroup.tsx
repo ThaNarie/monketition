@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { type League } from '../../../types/League';
 import { Section } from '../../section/Section';
-import { LeagueTile } from '../leage-tile/LeagueTile';
+import { LeagueCard } from '../leage-card/LeagueCard';
 import { ComingSoonCard } from './components/ComingSoon';
 import './league-groups.css';
 
@@ -30,7 +30,7 @@ export function LeagueGroup({
           {leagues ? (
             leagues.map((league) => (
               <div className="col" key={league.slug}>
-                <LeagueTile {...league} className="h-100" />
+                <LeagueCard {...league} className="h-100" />
               </div>
             ))
           ) : (

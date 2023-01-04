@@ -9,7 +9,7 @@ import { type SportType } from '../../../types/Sport';
 import { LeagueTitle } from '../league-title/LeagueTitle';
 import { ActivityChart } from './components/ActivityChart';
 import { Stats } from './components/Stats';
-import './leage-tile.scss';
+import './leage-card.scss';
 
 export const sportIcons: Partial<Record<SportType, string>> = {
   pool: poolIcon,
@@ -18,11 +18,11 @@ export const sportIcons: Partial<Record<SportType, string>> = {
   foosball: foosballIcon,
 };
 
-type LeagueTileProps = Partial<League> & { className?: string };
+type LeagueCardProps = Partial<League> & { className?: string };
 
 // TODO:
 //  - your rank in the league, if you participate
-export function LeagueTile({
+export function LeagueCard({
   slug,
   type,
   name,
@@ -33,9 +33,10 @@ export function LeagueTile({
   lastMatch,
   endAt,
   results,
-}: LeagueTileProps): JSX.Element {
+  matches,
+}: LeagueCardProps): JSX.Element {
   return (
-    <div className={classNames('league-tile', 'card', className)} data-sport-type={sport?.type}>
+    <div className={classNames('league-card', 'card', className)} data-sport-type={sport?.type}>
       <div className="card-body">
         {sport && <img className="sport-logo" src={sportIcons[sport.type]} alt={name} />}
         <Link to={`/leagues/${slug}`}>
@@ -51,7 +52,7 @@ export function LeagueTile({
         )}
         <p className="card-text description">{description}</p>
         <div className="chart">
-          <ActivityChart />
+          <ActivityChart matches={matches ?? []} />
         </div>
       </div>
       <div className="card-footer text-muted">

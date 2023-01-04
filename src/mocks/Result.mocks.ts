@@ -19,7 +19,8 @@ export function getMockResult({ fields = {}, forLeague }: MockOptions): Result {
 
   return {
     id: faker.datatype.uuid(),
-    participant: fields.participant ?? getMockParticipant({ fields: { league: forLeague } }),
+    participant:
+      fields.participant ?? getMockParticipant({ bare: true, fields: { league: forLeague } }),
     rank: fields.rank ?? faker.datatype.number(100),
     score: score ?? faker.datatype.number(3000),
   };

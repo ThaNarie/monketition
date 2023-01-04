@@ -1,6 +1,7 @@
-import { leagues } from '../../data/createMockData';
+import { leagues, matches } from '../../data/createMockData';
 import { useUser } from '../../data/me';
 import { LeagueGroup } from '../league/league-group/LeagueGroup';
+import { MatchListing } from '../match/match-listing/MatchListing';
 
 export function LeaguesPage(): JSX.Element {
   const me = useUser();
@@ -34,6 +35,7 @@ export function LeaguesPage(): JSX.Element {
         groupName="Tournament"
         description="Short-lived tournaments in varied formats."
       />
+      <MatchListing matches={matches} display="full" ctaType="external" />
     </div>
   );
 }

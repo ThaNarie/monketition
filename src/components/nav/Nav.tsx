@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { me, useUser } from '../../data/me';
 import { getMockLeague } from '../../mocks/Leage.mocks';
+import { Avatar } from '../atoms/avatar/Avatar';
 import { Icon } from '../atoms/icon/Icon';
 import './nav.scss';
 
@@ -105,18 +106,14 @@ export function Nav(): JSX.Element {
             <li className="nav-item dropdown">
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle d-flex align-items-center"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <img
-                  className="rounded-circle shadow-4-strong me-2"
-                  alt="avatar2"
-                  src="https://i.pravatar.cc/32"
-                />
-                {me.name}
+                <Avatar user={me} className="me-2" />
+                <span>{me.name}</span>
               </a>
               <ul className="dropdown-menu">
                 <li className="dropdown-item-text text-muted d-flex justify-content-between align-items-center">

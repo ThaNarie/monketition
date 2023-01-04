@@ -1,15 +1,15 @@
 import type { StoryObj } from '@storybook/react';
 import { getMockLeague } from '../../../mocks/Leage.mocks';
-import { LeagueTile } from './LeagueTile';
+import { LeagueCard } from './LeagueCard';
 
 export default {
-  title: 'league/LeagueTile',
-  component: LeagueTile,
+  title: 'league/LeagueCard',
+  component: LeagueCard,
 };
 
-export const Default: StoryObj<typeof LeagueTile> = {
+export const Default: StoryObj<typeof LeagueCard> = {
   render(props) {
-    return <LeagueTile {...props} />;
+    return <LeagueCard {...props} />;
   },
   args: {
     ...getMockLeague(),
@@ -23,7 +23,7 @@ export const List: StoryObj = {
         {Array.from({ length: 10 }).map((_, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <div className="col-xl-6" key={index}>
-            <LeagueTile {...getMockLeague()} />
+            <LeagueCard {...getMockLeague()} />
           </div>
         ))}
       </div>

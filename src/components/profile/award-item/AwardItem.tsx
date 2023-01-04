@@ -1,6 +1,6 @@
 import classNames from 'clsx';
 import { type Sport } from '../../../types/Sport';
-import { sportIcons } from '../../league/leage-tile/LeagueTile';
+import { sportIcons } from '../../league/leage-card/LeagueCard';
 import './award-item.scss';
 
 type AwardItemProps = {
