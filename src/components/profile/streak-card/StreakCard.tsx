@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { useCallback, useMemo } from 'react';
 import { type Participant } from '../../../types/Participant';
 import { type Sport } from '../../../types/Sport';
+import { getOpponentRecords } from '../../../utils/participant/getOpponentRecords';
 import { BarChart } from '../../atoms/bar-chart/BarChart';
 import { SportInfo } from '../../atoms/sport-info/SportInfo';
 import { StreakInfo } from '../../atoms/streak-info/StreakInfo';
@@ -36,6 +37,8 @@ export function StreakCard({ participant }: StreakCardProps): JSX.Element {
     () => participant.matches.filter((match) => match.winner === participant).length,
     [participant],
   );
+
+  const opponentRecords = useMemo(() => getOpponentRecords(participant), [participant]);
 
   const getColor = useCallback(
     ({ dataPointIndex }: { dataPointIndex: number | undefined }) => {
@@ -95,6 +98,27 @@ export function StreakCard({ participant }: StreakCardProps): JSX.Element {
           </div>
         </div>
       </div>
+      <ul className="list-group list-group-flush">
+        {[
+          { heading: 'Most played against', data: opponentRecords.mostPlayedAgainst },
+          { heading: 'Most won against', data: opponentRecords.mostWonAgainst },
+          { heading: 'Most lost against', data: opponentRecords.mostLostAgainst },
+        ].map(({ heading, data }) => (
+          <li className="list-group-item" key={heading}>
+            <h6 className="label">{heading}</h6>
+            <p>{data.participant.user.name}</p>
+            <div className="streak-record-line">
+              <span className="label">Games played</span> <span>{data.games}</span>
+            </div>
+            <div className="streak-record-line">
+              <span className="label">Games won</span>{' '}
+              <span>
+                {Math.round(data.winRatio * 100)}% ({data.wins})
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

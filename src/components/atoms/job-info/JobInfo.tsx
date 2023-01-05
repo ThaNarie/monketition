@@ -4,12 +4,14 @@ import { Icon } from '../icon/Icon';
 
 type OfficeInfoProps = {
   jobType?: User['jobType'];
+  hideIcon?: boolean;
 };
 
-export function JobInfo({ jobType }: OfficeInfoProps): JSX.Element | null {
+export function JobInfo({ jobType, hideIcon }: OfficeInfoProps): JSX.Element | null {
   return jobType ? (
     <div className="job-info">
-      <Icon icon="work" size={18} /> {jobType}
+      {!hideIcon && <Icon className="job-icon" icon="work" size={18} />}
+      {jobType}
     </div>
   ) : null;
 }

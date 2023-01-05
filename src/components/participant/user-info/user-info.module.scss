@@ -1,0 +1,72 @@
+.userInfo {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+      'avatar heading'
+      'avatar info';
+  justify-items: start;
+  justify-content: start;
+  grid-row-gap: 2px;
+
+  &.variant-medium {
+    grid-row-gap: 2px;
+  }
+
+  &.variant-large {
+    grid-row-gap: 8px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.avatar {
+  align-self: center;
+  grid-area: avatar;
+  margin-right: 8px;
+
+  .variant-medium & {
+    margin-right: 12px;
+  }
+
+  .variant-large & {
+    margin-right: 16px;
+  }
+
+  img {
+    height: 36px;
+
+    .variant-medium & {
+      height: 42px;
+    }
+    .variant-large & {
+      height: 64px;
+    }
+  }
+}
+
+.heading {
+  grid-area: heading;
+  margin: 0;
+
+  .variant-large & {
+    line-height: 1em;
+  }
+}
+
+.info {
+  grid-area: info;
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+
+  .variant-large &, .variant-medium & {
+    column-gap: 16px;
+  }
+
+  .iconsHidden & {
+    column-gap: 8px;
+  }
+}

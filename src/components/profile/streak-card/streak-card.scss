@@ -6,15 +6,15 @@
     flex-direction: column;
     row-gap: 8px;
 
-    .streak-record-line {
-      display: flex;
-      justify-content: space-between;
-    }
+  }
+  .streak-record-line {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    .label {
-      display: inline-block;
-      min-width: 80px;
-    }
+  .label {
+    display: inline-block;
+    min-width: 80px;
   }
 
   .sport-info {

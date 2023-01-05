@@ -1,0 +1,31 @@
+.opponentRecord {
+  border-top: 1px solid var(--bs-border-color);
+  //border-bottom: 1px solid var(--bs-border-color);
+  //width: 300px;
+
+  h5 {
+    margin: 0;
+  }
+}
+
+.titleWrapper {
+  margin-bottom: 20px;
+
+}
+
+.titleInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleStat {
+  display: inline-block;
+  border: 1px solid var(--bs-border-color);
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+
+.userInfo {
+  margin-bottom: 16px;
+}

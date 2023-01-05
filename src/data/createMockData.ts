@@ -7,11 +7,11 @@ import { getMockUser } from '../mocks/User.mocks';
 import { type Match } from '../types/Match';
 
 // bare users
-export const users = Array.from({ length: 25 }, () => getMockUser({ bare: true }));
+export const users = Array.from({ length: 15 }, () => getMockUser({ bare: true }));
 console.group('mock data');
 console.log('users', users);
 console.log('me', users[0]);
-export const leagues = Array.from({ length: 3 }, () => getMockLeague({ bare: true }));
+export const leagues = Array.from({ length: 2 }, () => getMockLeague({ bare: true }));
 console.log('leagues', leagues);
 
 // list of all matches played

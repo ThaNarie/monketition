@@ -1,0 +1,35 @@
+.profilePage {
+}
+.awards {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+
+.userStats {
+  h6 {
+    margin: 0;
+  }
+}
+
+.statItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+
+  .statLabel {
+    flex-basis: 200px;
+  }
+
+  .statValue {
+    text-align: right;
+    flex-basis: 60px;
+  }
+
+  .statExtra {
+    flex-basis: 250px;
+    text-align: right;
+    color: var(--bs-secondary-color);
+  }
+}

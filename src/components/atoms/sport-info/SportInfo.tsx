@@ -1,7 +1,7 @@
 import { startCase } from 'lodash-es';
 import { type Sport } from '../../../types/Sport';
-import { sportIcons } from '../../league/leage-card/LeagueCard';
 import './sport-info.scss';
+import { Icon } from '../icon/Icon';
 
 type SportInfoProps = {
   sport: Sport;
@@ -10,7 +10,7 @@ type SportInfoProps = {
 export function SportInfo({ sport }: SportInfoProps): JSX.Element {
   return (
     <div className="sport-info">
-      <img className="sport-logo" src={sportIcons[sport.type]} alt={sport.name} />{' '}
+      <Icon icon={sport.type} className="sport-logo" />
       {startCase(sport.name)}
     </div>
   );

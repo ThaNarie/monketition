@@ -1,22 +1,12 @@
 import classNames from 'clsx';
 import { startCase } from 'lodash-es';
 import { Link } from 'react-router-dom';
-import foosballIcon from '../../../sports/foosball.svg';
-import poolIcon from '../../../sports/pool.svg';
-import tableTennisIcon from '../../../sports/table-tennis.svg';
 import { type League } from '../../../types/League';
-import { type SportType } from '../../../types/Sport';
+import { Icon } from '../../atoms/icon/Icon';
 import { LeagueTitle } from '../league-title/LeagueTitle';
 import { ActivityChart } from './components/ActivityChart';
 import { Stats } from './components/Stats';
 import './leage-card.scss';
-
-export const sportIcons: Partial<Record<SportType, string>> = {
-  pool: poolIcon,
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  'table-tennis': tableTennisIcon,
-  foosball: foosballIcon,
-};
 
 type LeagueCardProps = Partial<League> & { className?: string };
 
@@ -38,7 +28,7 @@ export function LeagueCard({
   return (
     <div className={classNames('league-card', 'card', className)} data-sport-type={sport?.type}>
       <div className="card-body">
-        {sport && <img className="sport-logo" src={sportIcons[sport.type]} alt={name} />}
+        {sport && <Icon icon={sport.type} className="sport-logo" />}
         <Link to={`/leagues/${slug}`}>
           <LeagueTitle as="h4" type={type}>
             {name}

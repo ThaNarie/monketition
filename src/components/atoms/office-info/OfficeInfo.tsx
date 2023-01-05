@@ -5,12 +5,14 @@ import { Icon } from '../icon/Icon';
 
 type OfficeInfoProps = {
   office?: OfficeLocation;
+  hideIcon?: boolean;
 };
 
-export function OfficeInfo({ office }: OfficeInfoProps): JSX.Element | null {
+export function OfficeInfo({ office, hideIcon = false }: OfficeInfoProps): JSX.Element | null {
   return office ? (
     <div className="office-info">
-      <Icon icon="apartment" size={18} /> {startCase(office)}
+      {!hideIcon && <Icon icon="apartment" className="office-icon" size={18} />}
+      {startCase(office)}
     </div>
   ) : null;
 }

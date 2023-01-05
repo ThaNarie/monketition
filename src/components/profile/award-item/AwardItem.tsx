@@ -1,6 +1,6 @@
 import classNames from 'clsx';
 import { type Sport } from '../../../types/Sport';
-import { sportIcons } from '../../league/leage-card/LeagueCard';
+import { Icon } from '../../atoms/icon/Icon';
 import './award-item.scss';
 
 type AwardItemProps = {
@@ -12,7 +12,7 @@ type AwardItemProps = {
 export function AwardItem({ type, amount, sport, achieved }: AwardItemProps): JSX.Element {
   return (
     <div className={classNames('award-item', { achieved })}>
-      {sport && <img className="sport-logo" src={sportIcons[sport.type]} alt={sport.type} />}
+      {sport && <Icon icon={sport.type} className="sport-logo" />}
       <div className="award-item-title">{type}</div>
       <div className="award-item-amount">{amount}</div>
     </div>
