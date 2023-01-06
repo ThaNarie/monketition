@@ -1,0 +1,74 @@
+#root {
+  overflow-x: hidden;
+  height: 100vh;
+
+  --player-name: #0c7da1;
+}
+
+.material-symbols-outlined {
+  position: relative;
+  top: -2px;
+  vertical-align: middle;
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+.material-symbols-outlined.md-18 { font-size: 18px; }
+.material-symbols-outlined.md-24 { font-size: 24px; }
+.material-symbols-outlined.md-36 { font-size: 36px; }
+.material-symbols-outlined.md-48 { font-size: 48px; }
+
+:root {
+  /*--bs-primary: #a98eda;*/
+  /*--bs-primary-rgb: 169, 142, 218;*/
+}
+
+.react-select-container {
+  .react-select__control {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-border-color);
+
+    &:hover {
+      border-color: var(--bs-border-color);
+    }
+    &.focus {
+      color: var(--bs-body-color);
+      background-color: var(--bs-form-control-bg);
+      border-color: #86b7fe;
+      outline: 0;
+      box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+    }
+
+    &.hasValue {
+      border-color: rgba(var(--bs-white-rgb), 0.5);
+    }
+  }
+
+  .react-select__menu {
+    background-color: var(--bs-dark);
+    border: 1px solid var(--bs-border-color);
+  }
+
+  .react-select__option {
+    background-color: var(--bs-dark);
+
+    &:hover, &.focus {
+      background-color: var(--bs-dark-bg-subtle);
+    }
+  }
+
+  .react-select__indicator-separator {
+    background-color: var(--bs-border-color);
+  }
+
+  .react-select__placeholder, .react-select__single-value {
+    color: var(--bs-body-color);
+  }
+
+  .react-select__input {
+    color: var(--bs-body-color);
+  }
+}

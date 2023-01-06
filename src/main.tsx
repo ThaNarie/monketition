@@ -12,8 +12,9 @@ import { LeaguePage } from './components/pages/LeaguePage';
 import { LeaguesPage } from './components/pages/LeaguesPage';
 import { MatchesPage } from './components/pages/MatchesPage';
 import { ProfilePage } from './components/pages/ProfilePage';
-import './index.css';
+import { RulesPage } from './components/pages/RulesPage';
 import { me, UserContext } from './data/me';
+import './index.scss';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="leagues/:id" element={<LeaguePage />} />
       <Route path="profile/:id" element={<ProfilePage />} />
       <Route path="matches" element={<MatchesPage />} />
+      <Route path="rules/:sport?" element={<RulesPage />} />
     </Route>,
   ),
 );

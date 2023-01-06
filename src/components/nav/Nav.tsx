@@ -1,6 +1,6 @@
 import classNames from 'clsx';
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { me, useUser } from '../../data/me';
 import { getMockLeague } from '../../mocks/Leage.mocks';
 import { Avatar } from '../atoms/avatar/Avatar';
@@ -86,6 +86,16 @@ export function Nav(): JSX.Element {
                   </Link>
                 </li>
               </ul>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/matches" className="nav-link">
+                Matches
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/rules" className="nav-link">
+                Rules
+              </NavLink>
             </li>
           </ul>
           <button className="btn btn-outline-success me-3" type="submit">

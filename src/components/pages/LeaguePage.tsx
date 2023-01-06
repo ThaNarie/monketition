@@ -61,9 +61,9 @@ export function LeaguePage(): JSX.Element {
             <div>
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Custom rules</h5>
-                  <p className="card-text">There are no custom rules</p>
-                  <Link to="/rules/table-tennis" className="button">
+                  <h5 className="card-title">League rules</h5>
+                  <p className="card-text">This league follows the default rules.</p>
+                  <Link to="/rules/table-tennis" className="button text-body-secondary">
                     Default rules
                   </Link>
                 </div>

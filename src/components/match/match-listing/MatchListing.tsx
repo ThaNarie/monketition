@@ -12,6 +12,12 @@ export type MatchListingProps = {
   display?: 'full' | 'compact';
   ctaType?: 'inline' | 'external' | 'none';
   onlyListing?: boolean;
+  externalSearchParams?: {
+    player?: string;
+    opponent?: string;
+    league?: string;
+    office?: string;
+  };
 };
 export function MatchListing({
   heading = 'Recent Matches',
@@ -20,6 +26,7 @@ export function MatchListing({
   display = 'compact',
   ctaType = 'inline',
   onlyListing = false,
+  externalSearchParams: externalSearchParameters = {},
 }: MatchListingProps): JSX.Element {
   const [allVisible, setAllVisible] = useState(amount === 'all');
 
@@ -65,7 +72,7 @@ export function MatchListing({
             {allVisible ? <>Show less</> : <>Show all {matches.length} matches</>}
           </Button>
         ) : (
-          <Link to="/matches">
+          <Link to={`/matches?${new URLSearchParams(externalSearchParameters).toString()}`}>
             <Button variant="outline-success" className="mt-3">
               See all matches
             </Button>

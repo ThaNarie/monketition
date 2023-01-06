@@ -1,0 +1,69 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+
+.rulesPage {
+}
+
+.introText {
+}
+
+@media (min-width: map-get($grid-breakpoints, 'md')) {
+  .introText {
+    column-count: 2;
+    column-gap: 2em;
+  }
+}
+
+.rules {
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 2em;
+
+  @media (min-width: map-get($grid-breakpoints, 'md')) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  & + & {
+    padding-top: 2em;
+    margin-top: 3em;
+    border-top: 1px solid rgba(var(--bs-secondary-rgb), 0.3);
+  }
+
+  &:last-of-type {
+    margin-bottom: 3em;
+  }
+}
+
+.category {
+  //margin-bottom: 1em;
+
+  h6 {
+    margin: 0;
+  }
+
+  :global(.form-check-reverse) {
+    text-align: left;
+  }
+}
+
+.choice {
+  max-width: 350px;
+}
+
+.allowed, .disallowed, .official {
+  padding-left: 0.5em;
+}
+
+.allowed {
+  border-left: 4px solid var(--bs-success);
+}
+
+.disallowed {
+  border-left: 4px solid var(--bs-danger);
+}
+
+.official {
+  border-left: 4px solid var(--bs-secondary);
+}

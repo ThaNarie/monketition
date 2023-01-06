@@ -6,7 +6,7 @@ export function App(): JSX.Element {
   return (
     <div className="App">
       <Nav />
-      <div className="container">
+      <div className="container" style={{ minHeight: 'calc(100vh - 65px - 60px)' }}>
         <Outlet />
       </div>
       <ScrollRestoration />

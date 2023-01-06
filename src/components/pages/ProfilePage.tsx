@@ -282,6 +282,8 @@ export function ProfilePage(): JSX.Element {
               .flatMap(({ matches }) => matches)
               .filter((match) => match.participants.some((participant) => participant.user === me))}
             display="full"
+            ctaType="external"
+            externalSearchParams={{ player: user.id, opponent: me.id }}
           />
         )}
         <MatchListing
@@ -289,6 +291,8 @@ export function ProfilePage(): JSX.Element {
             .flatMap(({ matches }) => matches)
             .sort((a, b) => b.playedAt.getTime() - a.playedAt.getTime())}
           display="full"
+          ctaType="external"
+          externalSearchParams={{ player: user.id }}
         />
         <LeagueGroup
           groupName="Your leagues"
