@@ -81,8 +81,16 @@ export function LeaguePage(): JSX.Element {
           match.participants.some((participant) => participant.user === me),
         )}
         display="full"
+        ctaType="external"
+        externalSearchParams={{ league: league.id, player: me.id }}
       />
-      <MatchListing heading="Recent league matches" matches={league.matches} amount={6} />
+      <MatchListing
+        heading="Recent league matches"
+        matches={league.matches}
+        amount={6}
+        ctaType="external"
+        externalSearchParams={{ league: league.id }}
+      />
     </div>
   );
 }

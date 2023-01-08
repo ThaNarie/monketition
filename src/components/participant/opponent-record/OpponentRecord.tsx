@@ -1,16 +1,20 @@
 import classNames from 'clsx';
 import { type ReactNode } from 'react';
-import { type Participant } from '../../../types/Participant';
+import { Link } from 'react-router-dom';
+import { useProfileUser } from '../../../data/me';
+import { type User } from '../../../types/User';
+import { type OpponentRecordInfo } from '../../../utils/participant/getInfoAboutParticipant';
 import { UserInfo } from '../user-info/UserInfo';
 import styles from './opponent-record.module.scss';
 
 export type OpponentRecordProps = {
   className?: string;
-  opponent: Participant;
+  opponent: User;
   title: string;
   subtitle?: string;
   statValue: ReactNode;
   statClassName?: string;
+  stats: OpponentRecordInfo;
 };
 export function OpponentRecord({
   className,
@@ -19,7 +23,9 @@ export function OpponentRecord({
   subtitle,
   statValue,
   statClassName,
+  stats,
 }: OpponentRecordProps): JSX.Element {
+  const user = useProfileUser();
   return (
     <div className={classNames(styles.opponentRecord, className, 'mt-4 py-3')}>
       <div className={styles.titleWrapper}>
@@ -31,10 +37,20 @@ export function OpponentRecord({
           <small>{subtitle}</small>
         </div>
       </div>
-      <UserInfo className={styles.userInfo} user={opponent.user} variant="small" hideOffice />
-      <div>You played 12 games</div>
+      <UserInfo className={styles.userInfo} user={opponent} variant="small" hideOffice />
+      <div>Played {stats.games} games</div>
       <div>
-        <small>winning 5 – losing 7</small>
+        <small>
+          winning {stats.wins} – losing {stats.losses}
+        </small>
+      </div>
+      <div className="mt-3">
+        <Link
+          to={`/matches?${user ? `player=${user.id}` : ''}&opponent=${opponent.id}`}
+          className="text-secondary"
+        >
+          See all matches
+        </Link>
       </div>
       {/*<p>
         You won {7} of the {12} total games

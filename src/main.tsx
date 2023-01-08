@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from 'react-router-dom';
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="leagues/:id" element={<LeaguePage />} />
       <Route path="profile/:id" element={<ProfilePage />} />
       <Route path="matches" element={<MatchesPage />} />
+      <Route path="rules" element={<Navigate to="/rules/table-tennis" />} />
       <Route path="rules/:sport?" element={<RulesPage />} />
     </Route>,
   ),

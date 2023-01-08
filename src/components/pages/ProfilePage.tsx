@@ -7,6 +7,7 @@ import { getMockSport } from '../../mocks/Sport.mocks';
 import { type League } from '../../types/League';
 import { type Result } from '../../types/Result';
 import { type SportType } from '../../types/Sport';
+import { getInfoAboutUser } from '../../utils/participant/getInfoAboutParticipant';
 import { Icon } from '../atoms/icon/Icon';
 import { StreakInfo } from '../atoms/streak-info/StreakInfo';
 import { LeagueCard } from '../league/leage-card/LeagueCard';
@@ -14,6 +15,7 @@ import { LeagueGroup } from '../league/league-group/LeagueGroup';
 import { MatchCard } from '../match/match-card/MatchCard';
 import { MatchListing } from '../match/match-listing/MatchListing';
 import { OpponentRecord } from '../participant/opponent-record/OpponentRecord';
+import { OpponentStats } from '../participant/opponent-stats/OpponentStats';
 import { UserInfo } from '../participant/user-info/UserInfo';
 import { AwardItem } from '../profile/award-item/AwardItem';
 import { StreakCard } from '../profile/streak-card/StreakCard';
@@ -36,6 +38,7 @@ export function ProfilePage(): JSX.Element {
   const { id } = useParams();
 
   const user = id === 'me' ? me : users.find((userItem) => userItem.id === id) ?? me;
+  const userInfo = getInfoAboutUser(user);
 
   const [firstMatch] = user.participants
     .map(({ matches }) => matches[0])
@@ -52,22 +55,6 @@ export function ProfilePage(): JSX.Element {
   const [worstStreakParticipant] = [...user.participants].sort(
     (a, b) => a.worstStreak - b.worstStreak,
   );
-
-  const totalMatches = user.participants.reduce(
-    (total, participant) => total + participant.matches.length,
-    0,
-  );
-  const totalWins = user.participants.reduce(
-    (total, participant) =>
-      total + participant.matches.filter((match) => match.winner === participant).length,
-    0,
-  );
-  const totalLosses = user.participants.reduce(
-    (total, participant) =>
-      total + participant.matches.filter((match) => match.loser === participant).length,
-    0,
-  );
-  const winRate = totalWins / totalMatches;
 
   const [bestLeague, bestLeagueResult] = user.participants
     .map<[League, Result]>(({ league }) => [
@@ -94,7 +81,7 @@ export function ProfilePage(): JSX.Element {
                 <div className="col-md-8">
                   <div className={styles.statItem}>
                     <span className={styles.statLabel}>Total games played</span>
-                    <span className={styles.statValue}>{totalMatches}</span>
+                    <span className={styles.statValue}>{userInfo.gamesPlayed}</span>
                     <span className={styles.statExtra}>
                       Across {user.participants.length} leagues
                     </span>
@@ -102,14 +89,14 @@ export function ProfilePage(): JSX.Element {
                   <div className={styles.statItem}>
                     <span className={styles.statLabel}>Total games won</span>
                     <span className={classNames(styles.statValue, 'text-success')}>
-                      {totalWins}
+                      {userInfo.gamesWon}
                     </span>
                     <span className={styles.statExtra}></span>
                   </div>
                   <div className={styles.statItem}>
                     <span className={styles.statLabel}>Total games lost</span>
                     <span className={classNames(styles.statValue, 'text-danger')}>
-                      {totalLosses}
+                      {userInfo.gamesLost}
                     </span>
                     <span className={styles.statExtra}></span>
                   </div>
@@ -118,12 +105,12 @@ export function ProfilePage(): JSX.Element {
                     <span
                       className={classNames(styles.statValue, {
                         // eslint-disable-next-line @typescript-eslint/naming-convention
-                        'text-success': winRate > 0.5,
+                        'text-success': userInfo.winRatio > 0.5,
                         // eslint-disable-next-line @typescript-eslint/naming-convention
-                        'text-danger': winRate < 0.5,
+                        'text-danger': userInfo.winRatio < 0.5,
                       })}
                     >
-                      {Math.round(winRate * 100)}%
+                      {Math.round(userInfo.winRatio * 100)}%
                     </span>
                     <span className={styles.statExtra}></span>
                   </div>
@@ -237,29 +224,7 @@ export function ProfilePage(): JSX.Element {
             </div>
           </div>
           <div className="col-md-4">
-            <div>
-              <h3>Opponent Stats</h3>
-              <OpponentRecord
-                opponent={me.participants[0]}
-                title="Most encounters"
-                subtitle="Your practise partner"
-                statValue={38}
-              />
-              <OpponentRecord
-                opponent={me.participants[0]}
-                title="Most wins"
-                subtitle="Your padawan"
-                statValue="72%"
-                statClassName="text-success"
-              />
-              <OpponentRecord
-                opponent={me.participants[0]}
-                title="Most losses"
-                subtitle="Your nemesis"
-                statValue="28%"
-                statClassName="text-danger"
-              />
-            </div>
+            <OpponentStats user={user} />
           </div>
         </div>
         <Section heading="Awards">

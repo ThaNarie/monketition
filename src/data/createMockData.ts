@@ -6,17 +6,24 @@ import { findMockParticipant, updateStreakHistory } from '../mocks/Participant.m
 import { getMockUser } from '../mocks/User.mocks';
 import { type Match } from '../types/Match';
 
+/* eslint-disable @typescript-eslint/naming-convention */
+const USER_COUNT = 20;
+const LEAGUE_COUNT = 2;
+const MATCH_COUNT = 300;
+const USER_ROUNDS = 5;
+/* eslint-enable @typescript-eslint/naming-convention */
+
 // bare users
-export const users = Array.from({ length: 10 }, () => getMockUser({ bare: true }));
+export const users = Array.from({ length: USER_COUNT }, () => getMockUser({ bare: true }));
 console.group('mock data');
 console.log('users', users);
 console.log('me', users[0]);
-export const leagues = Array.from({ length: 5 }, () => getMockLeague({ bare: true }));
+export const leagues = Array.from({ length: LEAGUE_COUNT }, () => getMockLeague({ bare: true }));
 console.log('leagues', leagues);
 
 // list of all matches played
 export const matches: Array<Match> = [];
-const matchDates = Array.from({ length: 300 }, () => faker.date.recent(90)).sort(
+const matchDates = Array.from({ length: MATCH_COUNT }, () => faker.date.recent(90)).sort(
   (a, b) => a.getTime() - b.getTime(),
 );
 
@@ -46,7 +53,7 @@ function playMatch(userIndex: number): void {
 console.group('Play Matches');
 // let every player play at least some matches in one of the leagues
 // this lets us have a nice distribution of matches for each player and league
-for (let index = 0; index < 5; index++) {
+for (let index = 0; index < USER_ROUNDS; index++) {
   for (let userIndex = 0; userIndex < users.length; userIndex++) {
     if (matchDates.length === 0) {
       console.log('No more match dates');
@@ -57,7 +64,7 @@ for (let index = 0; index < 5; index++) {
 
 // het the first 10 users play out the rest of the matches
 while (matchDates.length > 0) {
-  playMatch(Math.floor(Math.random() * 10));
+  playMatch(Math.floor(Math.random() * Math.min(users.length, 10)));
 }
 
 console.groupEnd();

@@ -38,7 +38,7 @@ export function StreakCard({ participant }: StreakCardProps): JSX.Element {
     [participant],
   );
 
-  const opponentRecords = useMemo(() => getOpponentRecords(participant), [participant]);
+  // const opponentRecords = useMemo(() => getOpponentRecords(participant), [participant]);
 
   const getColor = useCallback(
     ({ dataPointIndex }: { dataPointIndex: number | undefined }) => {
@@ -98,7 +98,7 @@ export function StreakCard({ participant }: StreakCardProps): JSX.Element {
           </div>
         </div>
       </div>
-      <ul className="list-group list-group-flush">
+      {/*<ul className="list-group list-group-flush">
         {[
           { heading: 'Most played against', data: opponentRecords.mostPlayedAgainst },
           { heading: 'Most won against', data: opponentRecords.mostWonAgainst },
@@ -106,7 +106,7 @@ export function StreakCard({ participant }: StreakCardProps): JSX.Element {
         ].map(({ heading, data }) => (
           <li className="list-group-item" key={heading}>
             <h6 className="label">{heading}</h6>
-            <p>{data.participant.user.name}</p>
+            <p>{data.opponent.user.name}</p>
             <div className="streak-record-line">
               <span className="label">Games played</span> <span>{data.games}</span>
             </div>
@@ -118,7 +118,7 @@ export function StreakCard({ participant }: StreakCardProps): JSX.Element {
             </div>
           </li>
         ))}
-      </ul>
+      </ul>*/}
     </div>
   );
 }
