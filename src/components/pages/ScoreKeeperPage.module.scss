@@ -1,0 +1,96 @@
+.scoreKeeperPage {
+  min-height: calc(100vh - 65px);
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0, rgba(0,0,0,0) 150px);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 60px 20px 60px 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+      'player player-set-score vs opponent-set-score opponent'
+      'player-game-score . game-vs . opponent-game-score';
+  text-align: center;
+  align-items: center;
+}
+
+.participant {
+  font-size: 1.2rem;
+}
+
+.score {
+  margin: 0 10px;
+  border: 1px solid rgba(var(--bs-secondary-rgb), 0.5);
+  border-radius: 4px;
+  font-size: 1.5rem;
+
+  &.isAhead {
+    border-color: var(--bs-success);
+  }
+}
+
+.player {
+  grid-area: player;
+}
+
+.playerSetScore {
+  grid-area: player-set-score;
+}
+
+.versus {
+  grid-area: vs;
+}
+
+.opponentSetScore {
+  grid-area: opponent-set-score;
+}
+
+.opponent {
+  grid-area: opponent;
+}
+
+.playerGameScore {
+  grid-area: player-game-score;
+}
+
+.gameVersus {
+  grid-area: game-vs;
+  align-self: center;
+  font-size: 120px;
+}
+
+.opponentGameScore {
+  grid-area: opponent-game-score;
+}
+
+.point {
+  font-size: clamp(4rem, -0.875rem + 30vw, 30rem);
+  line-height: 1;
+}
+
+.previousGamesScore {
+  display: grid;
+  grid-template-columns: 1fr 10px 1fr;
+  grid-template-rows: auto;
+  grid-auto-rows: auto;
+}
+
+.playerPreviousGameScore {
+  grid-column: 1 / span 1;
+  text-align: right;
+  margin-right: 10px;
+  padding-right: 10px;
+}
+
+.previousGameVersus {
+  grid-column: 2 / span 1;
+  text-align: center;
+  align-self: center;
+}
+
+.opponentPreviousGameScore {
+  grid-column: 3 / span 1;
+  text-align: left;
+  margin-left: 10px;
+  padding-left: 10px;
+}
